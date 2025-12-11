@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cinemora – Subscription Plans</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0e0e12;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background: #111118;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #222;
+    }
+
+    header .logo img {
+      height: 55px;
+    }
+
+    header a.back-btn {
+      color: #9da1ff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.2s;
+    }
+
+    header a.back-btn:hover {
+      color: #c8c9ff;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 70px 20px;
+      background: linear-gradient(145deg, #16161c, #0b0b10);
+    }
+
+    .hero h1 {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #cfcfcf;
+      margin-bottom: 40px;
+    }
+
+    /* Plan Container */
+    .plans {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 40px 20px;
+      flex-wrap: wrap;
+    }
+
+    .plan {
+      background: #1a1a1e;
+      width: 310px;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      border: 2px solid #26262d;
+      transition: 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plan:hover {
+      transform: translateY(-10px);
+      border-color: #6c63ff;
+      box-shadow: 0 0 20px rgba(108, 99, 255, 0.4);
+    }
+
+    .plan h2 {
+      margin-bottom: 10px;
+      font-size: 28px;
+      color: #ffffff;
+    }
+
+    .price {
+      font-size: 32px;
+      font-weight: bold;
+      margin: 15px 0;
+      color: #6c63ff;
+    }
+
+    .features {
+      text-align: left;
+      margin: 20px 0;
+      line-height: 1.8;
+      color: #d7d7d7;
+    }
+
+    .plan button {
+      background: #6c63ff;
+      color: white;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .plan button:hover {
+      background: #5750e3;
+    }
+
+    /* Popular Tag */
+    .popular {
+      border-color: #ffca2c !important;
+      box-shadow: 0 0 20px rgba(255, 202, 44, 0.4);
+    }
+
+    .popular::before {
+      content: "MOST POPULAR";
+      position: absolute;
+      top: -5px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 150px;
+      padding: 5px 0;
+      background: #ffca2c;
+      color: black;
+      font-weight: bold;
+      border-radius: 0 0 8px 8px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html" class="back-btn">← Back</a>
+  <div class="logo">
+    <img src="cinemora-removebg-preview.png" alt="Cinemora Logo" />
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Choose the Perfect Plan for You</h1>
+  <p>Unlimited movies, series, and exclusive releases — only on Cinemora.</p>
+</section>
+
+<section class="plans">
+
+  <!-- Basic Plan -->
+  <div class="plan">
+    <h2>Basic</h2>
+    <p class="price">$6.99 / month</p>
+    <div class="features">
+      • HD Streaming<br>
+      • 1 Device at a time<br>
+      • Limited Downloads<br>
+      • Access to most movies & series
+    </div>
+    <button>Get Basic</button>
+  </div>
+
+  <!-- Standard Plan -->
+  <div class="plan popular">
+    <h2>Standard</h2>
+    <p class="price">$12.99 / month</p>
+    <div class="features">
+      • Full HD + HDR<br>
+      • 2 Devices at a time<br>
+      • Unlimited Downloads<br>
+      • Kids Mode Included<br>
+      • Priority Streaming
+    </div>
+    <button>Get Standard</button>
+  </div>
+
+  <!-- Premium Plan -->
+  <div class="plan">
+    <h2>Premium</h2>
+    <p class="price">$19.99 / month</p>
+    <div class="features">
+      • 4K Dolby Vision + Atmos<br>
+      • 4 Devices at a time<br>
+      • Ultra-Fast Streaming<br>
+      • Behind-the-scenes exclusives<br>
+      • Early access to new releases
+    </div>
+    <button>Get Premium</button>
+  </div>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cinemora Streaming</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ===== LOGIN / SIGNUP POPUP ===== -->
+<div class="auth-overlay hidden" id="authOverlay">
+  <div class="auth-modal">
+    <h2>Welcome to <span>Cinemora</span></h2>
+    <p id="authSubtitle">Sign in to continue</p>
+    <form id="authForm">
+      <input type="text" id="username" placeholder="Username" class="signup-only" style="display:none;" />
+      <input type="text" id="email" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Continue</button>
+    </form>
+    <p class="toggle-text">
+      <span>Don't have an account?</span> <a href="#" id="toggleAuth">Sign up</a>
+    </p>
+  </div>
+</div>
+
+
+<header class="navbar">
+  <div class="logo">
+  <img src="cinemora-removebg-preview.png" alt="Cinemora Logo" />
+  <span>Your World of Entertainment</span>
+</div>
+
+<!-- USER ICON (right side of logo) -->
+<div class="user-profile" id="userProfile">
+  <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User Icon" />
+  <div class="user-dropdown" id="userDropdown">
+    <p id="userNameDisplay">Logged in as: <strong>User</strong></p>
+    <button id="logoutBtn">Log Out</button>
+  </div>
+</div>
+    <nav class="nav-links">
+      <a href="series.html">Series</a>
+      <a href="movies.html">Movies</a>
+      <a href="kids.html">Kids</a>
+      <a href="mylist.html">My List</a>
+  <div class="search">
+  <input type="text" id="searchInput" placeholder="Search..." autocomplete="off" />
+  <div id="suggestions" class="suggestions-box"></div>
+  </div>
+      <a class="subscribe-btn" href="subscribe.html">Subscribe</a>
+    </nav>
+  </header>
+<div id="landing">
+  <h1>Welcome to Cinemora</h1>
+  <h1>Your World of Entertainment</h1>
+  <p>Scroll down to see our collection</p>
+  <button onclick="scrollToContent()">Explore Movies</button>
+</div>
+
+<div id="main-content">
+<main class="featured-section">
+  <a href="sinners.html" class="card">
+    <img class="thumbnail" src="https://www.chennaitop10.com/wp-content/uploads/2025/09/sinners-poster-2025.jpg" alt="Sinners" />
+    <video class="trailer" muted preload="metadata">
+      <source src="Sinners ｜ Official Trailer.mp4" type="video/mp4" />
+    </video>
+    <div class="card-info">
+      <h2>SINNERS</h2>
+      <p>Dance with the Devil</p>
+      <button class="play-btn">▶ Play</button>
+    </div>
+    <div class="heart-btn" data-title="Sinners" data-img="https://www.chennaitop10.com/wp-content/uploads/2025/09/sinners-poster-2025.jpg" data-page="sinners.html">💜</div>
+
+  </a>
+
+  <a href="minecraft.html" class="card">
+    <img class="thumbnail" src="https://image.tmdb.org/t/p/original/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg" alt="A Minecraft Movie" />
+    <video class="trailer" muted preload="metadata">
+      <source src="A Minecraft Movie ｜ Official Trailer.mp4" type="video/mp4" />
+    </video>
+    <div class="card-info">
+      <h2>A Minecraft Movie</h2>
+      <p>Get ready to craft your world</p>
+      <button class="watch-btn">Watch Now</button>
+    </div>
+    <div class="heart-btn" data-title="A Minecraft Movie" data-img="https://image.tmdb.org/t/p/original/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg" data-page="minecraft.html">💜</div>
+
+  </a>
+
+  <a href="f1.html" class="card">
+    <img class="thumbnail" src="https://www.wellfleetcinemas.com/wp-content/uploads/F1MOVIE_GEN_Dated_1920x1080.jpg" alt="F1" />
+    <video class="trailer" muted preload="metadata">
+      <source src="F1® The Movie ｜ Official Trailer.mp4" type="video/mp4" />
+    </video>
+    <div class="card-info">
+      <h2>F1</h2>
+      <p>Available Exclusively</p>
+    </div>
+    <div class="heart-btn" data-title="F1" data-img="https://www.wellfleetcinemas.com/wp-content/uploads/F1MOVIE_GEN_Dated_1920x1080.jpg" data-page="f1.html">💜</div>
+
+  </a>
+</main>
+
+
+  <section class="trending">
+  <h3>Trending Now</h3>
+  <div class="carousel-wrapper">
+    <div class="carousel">
+
+      <div class="carousel-item"
+           data-title="Breaking Bad"
+           data-page="breakingbad"
+           data-img="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg">
+        <img src="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg" alt="Breaking Bad">
+        <div class="heart-btn"
+             data-title="Breaking Bad"
+             data-img="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg"
+             data-page="breakingbad">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Better Call Saul"
+           data-page="bettercallsaul"
+           data-img="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295">
+        <img src="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295" alt="Better Call Saul">
+        <div class="heart-btn"
+             data-title="Better Call Saul"
+             data-img="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295"
+             data-page="bettercallsaul">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Dexter: Resurrection"
+           data-page="dexter"
+           data-img="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg">
+        <img src="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg" alt="Dexter: Resurrection">
+        <div class="heart-btn"
+             data-title="Dexter: Resurrection"
+             data-img="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg"
+             data-page="dexter">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Prison Break"
+           data-page="prisonbreak"
+           data-img="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg">
+        <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg" alt="Prison Break">
+        <div class="heart-btn"
+             data-title="Prison Break"
+             data-img="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg"
+             data-page="prisonbreak">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Alice in Borderland"
+           data-page="aliceinborderland"
+           data-img="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+        <img src="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Alice in Borderland">
+        <div class="heart-btn"
+             data-title="Alice in Borderland"
+             data-img="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+             data-page="aliceinborderland">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Reacher"
+           data-page="reacher"
+           data-img="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg">
+        <img src="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg" alt="Reacher">
+        <div class="heart-btn"
+             data-title="Reacher"
+             data-img="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg"
+             data-page="reacher">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="The Walking Dead"
+           data-page="thewalkingdead"
+           data-img="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2">
+        <img src="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2" alt="The Walking Dead">
+        <div class="heart-btn"
+             data-title="The Walking Dead"
+             data-img="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2"
+             data-page="thewalkingdead">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="You"
+           data-page="you"
+           data-img="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+        <img src="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="You">
+        <div class="heart-btn"
+             data-title="You"
+             data-img="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+             data-page="you">💜</div>
+      </div>
+            <div class="carousel-item"
+           data-title="Breaking Bad"
+           data-page="breakingbad"
+           data-img="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg">
+        <img src="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg" alt="Breaking Bad">
+        <div class="heart-btn"
+             data-title="Breaking Bad"
+             data-img="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg"
+             data-page="breakingbad">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Better Call Saul"
+           data-page="bettercallsaul"
+           data-img="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295">
+        <img src="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295" alt="Better Call Saul">
+        <div class="heart-btn"
+             data-title="Better Call Saul"
+             data-img="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295"
+             data-page="bettercallsaul">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Dexter: Resurrection"
+           data-page="dexter"
+           data-img="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg">
+        <img src="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg" alt="Dexter: Resurrection">
+        <div class="heart-btn"
+             data-title="Dexter: Resurrection"
+             data-img="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg"
+             data-page="dexter">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Prison Break"
+           data-page="prisonbreak"
+           data-img="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg">
+        <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg" alt="Prison Break">
+        <div class="heart-btn"
+             data-title="Prison Break"
+             data-img="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg"
+             data-page="prisonbreak">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Alice in Borderland"
+           data-page="aliceinborderland"
+           data-img="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+        <img src="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Alice in Borderland">
+        <div class="heart-btn"
+             data-title="Alice in Borderland"
+             data-img="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+             data-page="aliceinborderland">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Reacher"
+           data-page="reacher"
+           data-img="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg">
+        <img src="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg" alt="Reacher">
+        <div class="heart-btn"
+             data-title="Reacher"
+             data-img="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg"
+             data-page="reacher">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="The Walking Dead"
+           data-page="thewalkingdead"
+           data-img="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2">
+        <img src="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2" alt="The Walking Dead">
+        <div class="heart-btn"
+             data-title="The Walking Dead"
+             data-img="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2"
+             data-page="thewalkingdead">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="You"
+           data-page="you"
+           data-img="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+        <img src="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="You">
+        <div class="heart-btn"
+             data-title="You"
+             data-img="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+             data-page="you">💜</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="toast" class="toast"></div>
+  <script src="script.js">
+  </script>
+</body>
+</html>

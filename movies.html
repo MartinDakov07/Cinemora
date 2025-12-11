@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cinemora Streaming</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .movie-header {
+      width: 100%;
+      background: rgba(15, 16, 22, 0.9);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+    }
+    .movie-header h3 {
+      position: absolute;
+      left: 250px;
+      color: var(--accent2);
+    }
+    .navbar .home {
+      color: var(--accent, #6c63ff);
+      text-decoration: none;
+      margin-left: 30px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .navbar .home:hover {
+      color: var(--accent2, #a44cf5);
+    }
+    .navbar h3{
+      position:absolute;
+      left:550px;
+      color:var(--accent2);
+    }
+    .nav-links a:hover,
+    .nav-links .active {
+      color: #6c63ff;
+      text-shadow: 0 0 10px #6c63ff;
+    }
+
+    /* Heart button */
+    .heart-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 30px;
+      cursor: pointer;
+      user-select: none;
+      color: #8e68ff;
+      transition: transform 0.2s ease;
+      z-index: 10;
+    }
+    .heart-btn:hover {
+      transform: scale(1.2);
+    }
+    .hearted {
+      color: #c29cff !important;
+      text-shadow: 0 0 6px #a884ff;
+      animation: pop 0.25s ease;
+    }
+    @keyframes pop {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.35); }
+      100% { transform: scale(1.15); }
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: rgba(20, 20, 30, 0.95);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-size: 15px;
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      z-index: 9999;
+      border-left: 4px solid #8e68ff;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <img src="cinemora-removebg-preview.png" alt="Cinemora Logo">
+    <span>Your World of Entertainment</span>
+    <a href="index.html" class="home">← Back to Home</a>
+    <h3>Movies</h3>
+  </div>
+  <nav class="nav-links">
+    <a href="series.html">Series</a>
+    <a href="movies.html" class="active">Movies</a>
+    <a href="kids.html">Kids</a>
+    <a href="mylist.html">My List</a>
+  </nav>
+</header>
+
+<div id="main-content">
+<main class="featured-section">
+
+  <!-- MOVIE 1 -->
+  <a href="sinners.html" class="card"
+     data-title="Sinners"
+     data-img="https://www.chennaitop10.com/wp-content/uploads/2025/09/sinners-poster-2025.jpg"
+     data-page="sinners">
+
+    <div class="heart-btn"
+         data-title="Sinners"
+         data-img="https://www.chennaitop10.com/wp-content/uploads/2025/09/sinners-poster-2025.jpg"
+         data-page="sinners">💜</div>
+
+    <img class="thumbnail" src="https://www.chennaitop10.com/wp-content/uploads/2025/09/sinners-poster-2025.jpg" alt="Sinners" />
+    <video class="trailer" muted preload="metadata">
+      <source src="Sinners ｜ Official Trailer.mp4" type="video/mp4" />
+    </video>
+    <div class="card-info">
+      <h2>SINNERS</h2>
+      <p>Dance with the Devil</p>
+      <button class="play-btn">▶ Play</button>
+    </div>
+  </a>
+
+  <!-- MOVIE 2 -->
+  <a href="minecraft.html" class="card"
+     data-title="A Minecraft Movie"
+     data-img="https://image.tmdb.org/t/p/original/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg"
+     data-page="minecraft">
+
+    <div class="heart-btn"
+         data-title="A Minecraft Movie"
+         data-img="https://image.tmdb.org/t/p/original/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg"
+         data-page="minecraft">💜</div>
+
+    <img class="thumbnail" src="https://image.tmdb.org/t/p/original/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg" alt="Minecraft Movie" />
+    <video class="trailer" muted preload="metadata">
+      <source src="A Minecraft Movie ｜ Official Trailer.mp4" type="video/mp4" />
+    </video>
+    <div class="card-info">
+      <h2>A Minecraft Movie</h2>
+      <p>Get ready to craft your world</p>
+      <button class="watch-btn">Watch Now</button>
+    </div>
+  </a>
+
+  <!-- MOVIE 3 -->
+  <a href="f1.html" class="card"
+     data-title="F1"
+     data-img="https://www.wellfleetcinemas.com/wp-content/uploads/F1MOVIE_GEN_Dated_1920x1080.jpg"
+     data-page="f1">
+
+    <div class="heart-btn"
+         data-title="F1"
+         data-img="https://www.wellfleetcinemas.com/wp-content/uploads/F1MOVIE_GEN_Dated_1920x1080.jpg"
+         data-page="f1">💜</div>
+
+    <img class="thumbnail" src="https://www.wellfleetcinemas.com/wp-content/uploads/F1MOVIE_GEN_Dated_1920x1080.jpg" alt="F1 Movie" />
+    <video class="trailer" muted preload="metadata">
+      <source src="F1® The Movie ｜ Official Trailer.mp4" type="video/mp4" />
+    </video>
+    <div class="card-info">
+      <h2>F1</h2>
+      <p>Available Exclusively</p>
+    </div>
+  </a>
+
+</main>
+</div>
+
+<!-- Toast container -->
+<div id="toast" class="toast"></div>
+
+
+<script>
+/* Load & Save from localStorage */
+function loadMyList() {
+  return JSON.parse(localStorage.getItem("myList")) || [];
+}
+function saveMyList(list) {
+  localStorage.setItem("myList", JSON.stringify(list));
+}
+
+/* Toast queue system */
+let toastQueue = [];
+let toastActive = false;
+
+function showToast(msg) {
+  toastQueue.push(msg);
+  if (!toastActive) nextToast();
+}
+function nextToast() {
+  if (toastQueue.length === 0) { toastActive = false; return; }
+  toastActive = true;
+
+  const toast = document.getElementById("toast");
+  toast.textContent = toastQueue.shift();
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => nextToast(), 350);
+  }, 2200);
+}
+
+/* Highlight saved hearts */
+function markSavedHearts() {
+  const myList = loadMyList();
+  document.querySelectorAll(".heart-btn").forEach(btn => {
+    if (myList.some(item => item.title === btn.dataset.title)) {
+      btn.classList.add("hearted");
+    }
+  });
+}
+
+/* Click behavior for hearts */
+document.querySelectorAll(".heart-btn").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    // STOP the <a> tag navigation completely
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+
+    const item = {
+      title: btn.dataset.title,
+      img: btn.dataset.img,
+      page: btn.dataset.page
+    };
+
+    let myList = loadMyList();
+
+    if (myList.some(x => x.title === item.title)) {
+      myList = myList.filter(x => x.title !== item.title);
+      btn.classList.remove("hearted");
+      showToast(`${item.title} removed from My List`);
+    } else {
+      myList.push(item);
+      btn.classList.add("hearted");
+      showToast(`${item.title} added to My List 💜`);
+    }
+
+    saveMyList(myList);
+  });
+});
+markSavedHearts();
+</script>
+
+</body>
+</html>

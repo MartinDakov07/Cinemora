@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My List</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body {
+    background: #0e0e12;
+    color: white;
+    font-family: Arial;
+    padding: 20px;
+  }
+
+  .list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    gap: 25px;
+    justify-content: center;
+    margin-top: 25px;
+  }
+
+  .list-card {
+    background: #1a1a1e;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+  }
+
+  .list-card img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .trash {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 70, 70, 0.12);
+  border: 2px solid #ff4a4a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.trash::before {
+  content: "✕";
+  color: #ff4a4a;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.trash:hover {
+  background: #ff4a4a;
+  border-color: #ff4a4a;
+  transform: scale(1.15);
+}
+
+.trash:hover::before {
+  color: white;
+}
+
+  .back-btn {
+    padding: 10px 20px;
+    background: #6c63ff;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+
+<body>
+
+<button class="back-btn" onclick="location.href='index.html'">← Back to Home</button>
+
+<h2>My List</h2>
+
+<div id="listContainer" class="list-grid"></div>
+
+<script>
+// Load MyList
+function loadMyList() {
+  const list = localStorage.getItem("myList");
+  if (!list) return [];
+
+  try {
+    const parsed = JSON.parse(list);
+
+    // Remove items missing title or img
+    return parsed.filter(item =>
+      item &&
+      typeof item.title === "string" &&
+      item.title.trim() !== "" &&
+      typeof item.img === "string" &&
+      item.img.trim() !== ""
+    );
+
+  } catch (e) {
+    // If JSON is corrupt, reset it
+    localStorage.setItem("myList", "[]");
+    return [];
+  }
+}
+
+
+function saveMyList(list) {
+  localStorage.setItem("myList", JSON.stringify(list));
+}
+
+// Render items
+function displayList() {
+  const container = document.getElementById("listContainer");
+  const list = loadMyList();
+
+  if (list.length === 0) {
+    container.innerHTML = "<p>You still have 0 saves.</p>";
+    return;
+  }
+
+  container.innerHTML = list.map(item => `
+    <div class="list-card">
+      <span class="trash" data-title="${item.title}"></span>
+      <img src="${item.img}" alt="${item.title}">
+      <h4>${item.title}</h4>
+    </div>
+  `).join("");
+
+  document.querySelectorAll(".trash").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const title = btn.dataset.title;
+      removeItem(title);
+    });
+  });
+}
+
+// Remove an item
+function removeItem(title) {
+  let list = loadMyList();
+  list = list.filter(item => item.title !== title);
+  saveMyList(list);
+  displayList();
+}
+
+displayList();
+
+
+</script>
+
+</body>
+</html>

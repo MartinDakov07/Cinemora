@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cinemora Streaming</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .navbar {
+      width: 100%;
+      background: rgba(15, 16, 22, 0.9);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+    }
+    .navbar h3{
+        position:absolute;
+        left:550px;
+        color:var(--accent2);
+    }
+    .navbar .home {
+      color: var(--accent, #6c63ff);
+      text-decoration: none;
+      margin-left:30px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .navbar .nav-links{
+      margin-right:90px;
+    }
+      .navbar .home:hover {
+      color: var(--accent2, #a44cf5);
+    }
+    .nav-links a:hover,
+    .nav-links .active {
+      color: #6c63ff;
+      text-shadow: 0 0 10px #6c63ff;
+    }
+.carousel {
+  display: flex;
+  flex-wrap: wrap;          /* allow items to wrap to next line if needed */
+  justify-content: center;  /* center items horizontally */
+  align-items: center;      /* center items vertically if heights differ */
+  gap: 40px;                /* spacing between items */
+  margin-left:15px;
+  overflow: hidden;         /* hide overflow */
+  animation: none !important; /* stop any sliding from main CSS */
+}
+
+
+.carousel img {
+  width: 200px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.carousel img:hover {
+  transform: scale(1.05);
+}
+/* ===== CAROUSEL OVERLAY ON HOLD ===== */
+/* ===== HOVER TO REVEAL TITLE IN CAROUSEL ===== */
+.carousel-item {
+  position: relative;
+  display: inline-block;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.carousel-item img {
+  width: 200px;
+  border-radius: 10px;
+  cursor:pointer;
+  display: block;
+  transition:none;
+  user-select: none;
+}
+
+/* Overlay (hidden by default) */
+.carousel-item::after {
+  content: attr(data-title);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+
+/* Show overlay when hovering */
+.carousel-item:hover::after {
+  opacity: 1;
+}
+
+/* Slight darkening effect on hover */
+.carousel-item:hover img {
+  filter: brightness(0.7);
+}
+.heart-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 26px;
+  cursor: pointer;
+  user-select: none;
+  color: #8e68ff;
+  filter: drop-shadow(0 0 3px black);
+  transition: transform 0.2s ease;
+  pointer-events: auto;
+  z-index: 10;     /* makes sure it sits above image */
+}
+
+/* Smooth pop animation when heart is toggled */
+.heart-btn.hearted {
+  animation: pop 0.25s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35); }
+  100% { transform: scale(1.15); }
+}
+
+/* Floating toast notification with slide + fade */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(20, 20, 30, 0.95);
+  color: white;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 9999;
+  border-left: 4px solid #8e68ff;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0px) scale(1);
+}
+
+
+  </style>
+</head>
+<body>
+<header class="navbar">
+  <div class="logo">
+    <img src="cinemora-removebg-preview.png" alt="Cinemora Logo">
+    <span>Your World of Entertainment</span>
+    <a href="index.html" class="home">← Back to Home</a>
+    <h3>Series</h3>
+  </div>
+  <nav class="nav-links">
+    <a class="active" href="series.html">Series</a>
+    <a href="movies.html">Movies</a>
+    <a href="kids.html">Kids</a>
+    <a href="mylist.html">My List</a>
+  </nav>
+</header>
+<div class="carousel">
+
+      <div class="carousel-item"
+           data-title="Breaking Bad"
+           data-page="breakingbad"
+           data-img="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg">
+        <img src="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg" alt="Breaking Bad">
+        <div class="heart-btn"
+             data-title="Breaking Bad"
+             data-img="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg"
+             data-page="breakingbad">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Better Call Saul"
+           data-page="bettercallsaul"
+           data-img="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295">
+        <img src="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295" alt="Better Call Saul">
+        <div class="heart-btn"
+             data-title="Better Call Saul"
+             data-img="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295"
+             data-page="bettercallsaul">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Dexter: Resurrection"
+           data-page="dexter"
+           data-img="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg">
+        <img src="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg" alt="Dexter: Resurrection">
+        <div class="heart-btn"
+             data-title="Dexter: Resurrection"
+             data-img="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg"
+             data-page="dexter">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Prison Break"
+           data-page="prisonbreak"
+           data-img="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg">
+        <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg" alt="Prison Break">
+        <div class="heart-btn"
+             data-title="Prison Break"
+             data-img="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg"
+             data-page="prisonbreak">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Alice in Borderland"
+           data-page="aliceinborderland"
+           data-img="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+        <img src="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Alice in Borderland">
+        <div class="heart-btn"
+             data-title="Alice in Borderland"
+             data-img="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+             data-page="aliceinborderland">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Reacher"
+           data-page="reacher"
+           data-img="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg">
+        <img src="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg" alt="Reacher">
+        <div class="heart-btn"
+             data-title="Reacher"
+             data-img="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg"
+             data-page="reacher">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="The Walking Dead"
+           data-page="thewalkingdead"
+           data-img="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2">
+        <img src="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2" alt="The Walking Dead">
+        <div class="heart-btn"
+             data-title="The Walking Dead"
+             data-img="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2"
+             data-page="thewalkingdead">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="You"
+           data-page="you"
+           data-img="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+        <img src="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="You">
+        <div class="heart-btn"
+             data-title="You"
+             data-img="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+             data-page="you">💜</div>
+      </div>
+    </div>
+<script>
+function loadMyList() {
+  return JSON.parse(localStorage.getItem("myList")) || [];
+}
+
+function saveMyList(list) {
+  localStorage.setItem("myList", JSON.stringify(list));
+}
+
+// --- TOAST QUEUE SYSTEM ---
+let toastQueue = [];
+let toastActive = false;
+
+function showToast(message) {
+  toastQueue.push(message);
+  if (!toastActive) nextToast();
+}
+document.querySelectorAll(".carousel-item").forEach(card => {
+  card.addEventListener("click", function (e) {
+    
+    // Don't trigger when clicking heart button
+    if (e.target.classList.contains("heart-btn")) return;
+
+    const page = this.dataset.page;
+    if (!page) return;
+
+    // Open from series.html → go to the /series/... file
+    window.location.href = `series/${page}.html`;
+  });
+});
+
+function nextToast() {
+  if (toastQueue.length === 0) {
+    toastActive = false;
+    return;
+  }
+
+  toastActive = true;
+  const toast = document.getElementById("toast");
+  toast.textContent = toastQueue.shift();
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+
+    setTimeout(() => {
+      nextToast();
+    }, 350); 
+  }, 2200);
+}
+// -------------------------------------
+
+function markSavedHearts() {
+  const myList = loadMyList();
+
+  document.querySelectorAll(".heart-btn").forEach(btn => {
+    if (myList.some(item => item.title === btn.dataset.title)) {
+      btn.classList.add("hearted");
+    }
+  });
+}
+
+document.querySelectorAll(".heart-btn").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    const item = {
+      title: btn.dataset.title,
+      img: btn.dataset.img,
+      page: btn.dataset.page
+    };
+
+    let myList = loadMyList();
+
+    if (myList.some(x => x.title === item.title)) {
+      myList = myList.filter(x => x.title !== item.title);
+      btn.classList.remove("hearted");
+      showToast(`${item.title} removed from My List`);
+    } else {
+      myList.push(item);
+      btn.classList.add("hearted");
+      showToast(`${item.title} added to My List 💜`);
+    }
+
+    saveMyList(myList);
+  });
+});
+
+markSavedHearts();
+
+</script>
+<div id="toast" class="toast"></div>
+
+</body>
+</html>

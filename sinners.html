@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sinners | Cinemora</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #0b0c10;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .movie-header {
+      width: 100%;
+      background: rgba(15, 16, 22, 0.9);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+    }
+    .movie-header span{
+        position:absolute;
+        right:60px;
+    }
+    .movie-header a {
+      color: var(--accent, #6c63ff);
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+      margin-left:20px;
+    }
+    .movie-header a:hover {
+      color: var(--accent2, #a44cf5);
+    }
+
+    .movie-player {
+      margin-top: 40px;
+      width: 90%;
+      max-width: 1000px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .movie-player video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .movie-info {
+      max-width: 1000px;
+      padding: 20px;
+      text-align: left;
+    }
+
+    .movie-info h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #6c63ff, #a44cf5);
+      color: transparent;
+      -webkit-background-clip: text;
+    }
+
+    .movie-info p {
+      color: #ccc;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="movie-header">
+    <a href="index.html">← Back to Home</a>
+    <span>CINEMORA</span>
+  </header>
+
+  <section class="movie-player">
+    <video controls autoplay>
+      <source src="Sinners ｜ Official Trailer.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <section class="movie-info">
+    <h1>SINNERS</h1>
+    <p>
+      A dark thriller exploring the thin line between redemption and damnation.
+      Dive into a world where every choice has a price.
+    </p>
+  </section>
+</body>
+</html>

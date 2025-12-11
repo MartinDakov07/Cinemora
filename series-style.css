@@ -1,0 +1,199 @@
+/* === GLOBAL === */
+body {
+    background: #0b0c10;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Accent colors to match Cinemora */
+:root {
+    --accent: #6c63ff;
+    --accent2: #a44cf5;
+    --highlight: #e63946;
+}
+.series-header a {
+    color: var(--accent, #6c63ff);
+    text-decoration: none;
+    position:absolute;
+    left:60px;
+    top:150px;
+    font-weight: 600;
+    font-size:1.2rem;
+    transition: 0.3s;
+}
+
+.series-header a:hover {
+    color: var(--accent2, #a44cf5);
+}
+/* === HEADER === */
+.series-header {
+    padding: 40px 50px;
+}
+
+.series-header h1 {
+    font-size: 3rem;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    color: transparent;
+    margin: 0;
+}
+
+.series-header p {
+    margin: 10px 0 0;
+    font-size: 1rem;
+    color: #bbb;
+}
+
+/* === HERO SECTION (Poster + Trailer) === */
+.series-hero {
+    display: flex;
+    gap: 40px;
+    padding: 20px 50px;
+    flex-wrap: wrap;
+}
+
+.poster img {
+    width: 270px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+.trailer video {
+    width: 750px;
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+/* === TAGS === */
+.tags {
+    padding: 0 50px;
+    margin-top: 10px;
+}
+
+.tags span {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin: 5px;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
+}
+
+/* === DESCRIPTION === */
+.description {
+    padding: 20px 50px;
+    max-width: 900px;
+    line-height: 1.6;
+    color: #ddd;
+    font-size: 1rem;
+}
+
+/* === RATINGS SECTION === */
+.ratings-section {
+    padding: 30px 50px 70px;
+}
+
+.ratings-section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: var(--accent2);
+}
+
+/* Ratings Grid (Season + Episodes) */
+.ratings-grid {
+    display: grid;
+    grid-template-columns: 60px repeat(13, 55px);
+    gap: 10px;
+    align-items: center;
+}
+
+/* Season label */
+.season {
+    font-weight: 700;
+    color: #aaa;
+}
+
+/* Episode rating boxes */
+.ep {
+    background: #f3c623;
+    color: #000;
+    padding: 10px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect */
+.ep:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px #f3c623;
+    cursor:pointer;
+}
+.ep.high {
+    background: #e63946; /* or any highlight color */
+    color: #fff;
+    box-shadow: 0 0 15px #e63946;
+}
+.ep.low{
+    background:#ffe484;
+}
+.ep.low:hover{
+    box-shadow:0 0 15px #ffe484;
+}
+/* Each season in its own row */
+.season-row {
+    display: grid;
+    grid-template-columns: 60px repeat(auto-fit, 55px);
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 900px) {
+    .season-row {
+        grid-template-columns: 50px repeat(6, 45px);
+    }
+}
+
+@media (max-width: 600px) {
+    .season-row {
+        grid-template-columns: 40px repeat(4, 40px);
+        font-size: 0.8rem;
+    }
+}
+
+/* === MOBILE RESPONSIVE === */
+@media (max-width: 900px) {
+    .series-hero {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .poster img {
+        width: 220px;
+    }
+    
+    .ratings-grid {
+        grid-template-columns: 50px repeat(6, 45px);
+    }
+}
+
+@media (max-width: 600px) {
+    .series-header h1 {
+        font-size: 2.3rem;
+    }
+    .ratings-grid {
+        grid-template-columns: 40px repeat(4, 40px);
+        font-size: 0.8rem;
+    }
+}
