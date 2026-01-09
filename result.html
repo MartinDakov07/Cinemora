@@ -56,6 +56,23 @@
   object-fit: cover;
   transition: opacity .3s;
 }
+/* Smooth animation */
+.card-info {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* Hide text ONLY when hovering media (not buttons) */
+.media-container:hover ~ .card-info {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+/* Buttons remain interactive */
+.card-info button {
+  pointer-events: auto;
+}
+
 
 .trailer {
   position: absolute;
@@ -94,67 +111,133 @@
   // MOVIE DATABASE
   // ===============================
   const movies = {
-    "how to train your dragon": {
-      title: "How to Train Your Dragon",
-      img: "https://upload.wikimedia.org/wikipedia/en/9/99/How_to_Train_Your_Dragon_Poster.jpg",
-      trailer: "HOW TO TRAIN YOUR DRAGON： THE HIDDEN WORLD ｜ Official Trailer.mp4"
-    },
-    "harry potter": {
-      title: "Harry Potter",
-      img: "https://static1.moviewebimages.com/wordpress/wp-content/uploads/movie/QHEDmRuOHWBIoJ0BKRf3MXuG7I3q8I.jpg",
-      trailer: "Harry Potter and the Half-Blood Prince ｜ Official Trailer.mp4"
-    },
-    "the incredibles": {
-      title: "The Incredibles",
-      img: "https://picfiles.alphacoders.com/346/346533.jpg",
-      trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
-    },
-    "moana": {
-      title: "Moana",
-      img: "https://image.tmdb.org/t/p/original/z6mmye1efC6Q42HvrYQsZNOeH9H.jpg",
-      trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-    },
-    "frozen": {
-    title: "Frozen",
-    img: "https://tse2.mm.bing.net/th/id/OIP.PgHmGF-jyVYgOsavXn45NwHaLH?rs=1&pid=ImgDetMain&o=7&rm=3",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+  "how to train your dragon": {
+    title: "How to Train Your Dragon",
+    img: "https://upload.wikimedia.org/wikipedia/en/9/99/How_to_Train_Your_Dragon_Poster.jpg",
+    trailer: "./kids-trailers/HOW TO TRAIN YOUR DRAGON： THE HIDDEN WORLD ｜ Official Trailer.mp4",
+    age: "7+",
+    duration: "1h 38m",
+    description: "A young Viking named Hiccup befriends a dragon and proves that courage and friendship can change the world."
   },
+
+  "harry potter": {
+    title: "Harry Potter",
+    img: "https://static1.moviewebimages.com/wordpress/wp-content/uploads/movie/QHEDmRuOHWBIoJ0BKRf3MXuG7I3q8I.jpg",
+    trailer: "./kids-trailers/Harry Potter and the Half-Blood Prince ｜ Official Trailer.mp4",
+    age: "9+",
+    duration: "2h 33m",
+    description: "A boy discovers he is a wizard and begins a magical journey at Hogwarts, facing dark secrets and powerful enemies."
+  },
+
+  "the incredibles": {
+    title: "The Incredibles",
+    img: "https://picfiles.alphacoders.com/346/346533.jpg",
+    trailer: "./kids-trailers/Incredibles 2 Official Trailer.mp4",
+    age: "6+",
+    duration: "1h 55m",
+    description: "A family of superheroes must hide their powers while secretly saving the world from a dangerous new threat."
+  },
+
+  "moana": {
+    title: "Moana",
+    img: "https://image.tmdb.org/t/p/original/z6mmye1efC6Q42HvrYQsZNOeH9H.jpg",
+    trailer: "./kids-trailers/Moana 2 ｜ Official Trailer.mp4",
+    age: "6+",
+    duration: "1h 47m",
+    description: "A brave island girl sets sail across the ocean to restore balance and discover who she truly is."
+  },
+
+  "frozen": {
+    title: "Frozen",
+    img: "https://tse2.mm.bing.net/th/id/OIP.PgHmGF-jyVYgOsavXn45NwHaLH",
+    trailer: "./kids-trailers/Frozen Official Elsa Trailer (2013) - Disney Animated Movie HD.mp4",
+    age: "5+",
+    duration: "1h 42m",
+    description: "Two sisters learn the true meaning of love while uncovering magical powers that can freeze an entire kingdom."
+  },
+
   "minions": {
     title: "Minions",
     img: "https://www.themoviedb.org/t/p/original/oYsloNq9IYADOdzlsfDmuUQvJ2u.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    trailer: "./kids-trailers/Minions： The Rise of Gru ｜ Official Trailer.mp4",
+    age: "5+",
+    duration: "1h 31m",
+    description: "The mischievous Minions go on a hilarious adventure to find the perfect villain to serve."
   },
+
   "peppa pig": {
     title: "Peppa Pig",
-    img: "https://tse1.mm.bing.net/th/id/OIP.TPPKwI6cdOsT2yvmaa6XdQHaLH?w=720&h=1080&rs=1&pid=ImgDetMain&o=7&rm=3",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
+    img: "https://tse1.mm.bing.net/th/id/OIP.TPPKwI6cdOsT2yvmaa6XdQHaLH",
+    trailer: "./kids-trailers/Peppa Pig The Golden Boots trailer ｜ Peppa Pig Official Family Kids Cartoon.mp4",
+    age: "3+",
+    duration: "1h 5m",
+    description: "Peppa and her family enjoy fun, everyday adventures filled with laughter, learning, and imagination."
   },
+
   "paw patrol": {
     title: "Paw Patrol",
     img: "https://wallpapers.com/images/hd/paw-patrol-pictures-6fkpaia2w0imq1ud.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    trailer: "./kids-trailers/PAW Patrol： The Mighty Movie ｜ Official Trailer (2023 Movie).mp4",
+    age: "4+",
+    duration: "1h 26m",
+    description: "A team of heroic puppies works together to protect their community and save the day."
   },
+
   "toy story": {
     title: "Toy Story",
     img: "https://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ToyStory.mp4"
+    trailer: "./kids-trailers/Toy Story 3 Official Trailer [HD].mp4",
+    age: "5+",
+    duration: "1h 21m",
+    description: "Toys come to life when humans aren’t around, learning about friendship, jealousy, and growing up."
   },
+
   "finding nemo": {
     title: "Finding Nemo",
     img: "https://upload.wikimedia.org/wikipedia/en/2/29/Finding_Nemo.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Nemo.mp4"
+    trailer: "./kids-trailers/Finding Nemo.mp4",
+    age: "5+",
+    duration: "1h 40m",
+    description: "A clownfish travels across the ocean to rescue his son, discovering bravery along the way."
   },
+
   "kung fu panda": {
     title: "Kung Fu Panda",
     img: "https://whats-after-the-movie-ti152.sevalla.storage/movies/kung-fu-panda--4Kn0A.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/KungFuPanda.mp4"
+    trailer: "./kids-trailers/Kung Fu Panda 2 ｜ Official Trailer.mp4",
+    age: "6+",
+    duration: "1h 32m",
+    description: "An unlikely panda becomes a kung fu hero and learns that believing in yourself is the greatest power."
   },
+
   "cars": {
     title: "Cars",
     img: "https://3.bp.blogspot.com/-pZXLqqIgtZs/TjyUoBpPFyI/AAAAAAAAAN4/9IrdyPU06Vo/s1600/cars.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Cars.mp4"
+    trailer: "./kids-trailers/Cars 2 - Trailer 2.mp4",
+    age: "5+",
+    duration: "1h 57m",
+    description: "A race car learns the importance of friendship and humility after getting lost in a small town."
   }
-  };
+};
+
+setTimeout(() => {
+  const video = document.querySelector(".trailer");
+
+  if (!video) return;
+
+  const container = video.parentElement;
+
+  container.addEventListener("mouseenter", () => {
+    video.currentTime = 30;
+    video.play().catch(() => {});
+  });
+
+  container.addEventListener("mouseleave", () => {
+    video.pause();
+    video.currentTime = 30;
+  });
+}, 100);
+
 
   // Read search query
   const params = new URLSearchParams(window.location.search);
@@ -165,17 +248,46 @@
   if (movies[query]) {
     const m = movies[query];
 
-    container.innerHTML = `
-      <div class="card" style="width:280px; height:400px;">
-        <div class="media-container">
-          <img class="thumbnail" src="${m.img}">
-          <video class="trailer" muted loop preload="metadata" playsinline>
-            <source src="${m.trailer}" type="video/mp4">
-          </video>
-        </div>
-        <h3>${m.title}</h3>
+container.innerHTML = `
+  <div class="card" style="width:380px; height:430px;">
+
+    <div class="media-container">
+      <img class="thumbnail" src="${m.img}">
+      <video class="trailer" muted loop preload="metadata" playsinline>
+        <source src="${m.trailer}" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="card-info" style="text-align:left;">
+      <h3>${m.title}</h3>
+
+      <p style="font-size:0.85rem; opacity:0.9; margin:4px 0;">
+        🧒 Ages ${m.age} • ⏱ ${m.duration}
+      </p>
+
+      <p style="
+        font-size:0.9rem;
+        opacity:0.75;
+        line-height:1.4;
+        margin:10px 0 14px;
+      ">
+        ${m.description}
+      </p>
+
+      <div style="display:flex; gap:12px;">
+        <button class="play-btn">▶ Play</button>
+        <button class="play-btn" style="
+          background:linear-gradient(135deg,#ff9de6,#ffd36b);
+          color:#111;
+        ">
+          🎥 Trailer
+        </button>
       </div>
-    `;
+    </div>
+  </div>
+`;
+
+
   } else {
     container.innerHTML = `
       <h2 style="color:#ff4a8d;">Movie not found.</h2>

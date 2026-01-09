@@ -1,66 +1,68 @@
 // ================= MOVIE DATABASE =================
+// ================= MOVIE DATABASE (Correct Local Files) =================
 const movies = {
-  "how to train your dragon": {
-    title: "How to Train Your Dragon",
-    img: "https://upload.wikimedia.org/wikipedia/en/9/99/How_to_Train_Your_Dragon_Poster.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-  },
-  "harry potter": {
-    title: "Harry Potter",
-    img: "https://static1.moviewebimages.com/wordpress/wp-content/uploads/movie/QHEDmRuOHWBIoJ0BKRf3MXuG7I3q8I.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
-  },
-  "the incredibles": {
-    title: "The Incredibles",
-    img: "https://picfiles.alphacoders.com/346/346533.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
-  },
-  "moana": {
-    title: "Moana",
-    img: "https://image.tmdb.org/t/p/original/z6mmye1efC6Q42HvrYQsZNOeH9H.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-  },
   "frozen": {
     title: "Frozen",
-    img: "https://tse2.mm.bing.net/th/id/OIP.PgHmGF-jyVYgOsavXn45NwHaLH",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+    img: "https://tse2.mm.bing.net/th/id/OIP.PgHmGF-jyVYgOsavXn45NwHaLH?rs=1&pid=ImgDetMain&o=7&rm=3",
+    trailer: "Frozen Official Elsa Trailer (2013) - Disney Animated Movie HD.mp4"
   },
   "minions": {
     title: "Minions",
     img: "https://www.themoviedb.org/t/p/original/oYsloNq9IYADOdzlsfDmuUQvJ2u.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    trailer: "Minions： The Rise of Gru ｜ Official Trailer.mp4"
   },
   "peppa pig": {
     title: "Peppa Pig",
-    img: "https://tse1.mm.bing.net/th/id/OIP.TPPKwI6cdOsT2yvmaa6XdQHaLH",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
+    img: "https://tse1.mm.bing.net/th/id/OIP.TPPKwI6cdOsT2yvmaa6XdQHaLH?w=720&h=1080&rs=1&pid=ImgDetMain&o=7&rm=3",
+    trailer: "Peppa Pig The Golden Boots trailer ｜ Peppa Pig Official Family Kids Cartoon.mp4"
   },
   "paw patrol": {
     title: "Paw Patrol",
     img: "https://wallpapers.com/images/hd/paw-patrol-pictures-6fkpaia2w0imq1ud.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    trailer: "PAW Patrol： The Mighty Movie ｜ Official Trailer (2023 Movie).mp4"
   },
   "toy story": {
     title: "Toy Story",
     img: "https://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ToyStory.mp4"
+    trailer: "Toy Story 3 Official Trailer [HD].mp4"
   },
   "finding nemo": {
     title: "Finding Nemo",
     img: "https://upload.wikimedia.org/wikipedia/en/2/29/Finding_Nemo.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Nemo.mp4"
+    trailer: "Finding Nemo.mp4"
   },
   "kung fu panda": {
     title: "Kung Fu Panda",
     img: "https://whats-after-the-movie-ti152.sevalla.storage/movies/kung-fu-panda--4Kn0A.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/KungFuPanda.mp4"
+    trailer: "Kung Fu Panda 2 ｜ Official Trailer.mp4"
   },
   "cars": {
     title: "Cars",
     img: "https://3.bp.blogspot.com/-pZXLqqIgtZs/TjyUoBpPFyI/AAAAAAAAAN4/9IrdyPU06Vo/s1600/cars.jpg",
-    trailer: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Cars.mp4"
+    trailer: "Cars 2 - Trailer 2.mp4"
+  },
+  "how to train your dragon": {
+    title: "How to Train Your Dragon",
+    img: "https://upload.wikimedia.org/wikipedia/en/9/99/How_to_Train_Your_Dragon_Poster.jpg",
+    trailer: "HOW TO TRAIN YOUR DRAGON： THE HIDDEN WORLD ｜ Official Trailer.mp4"
+  },
+  "harry potter": {
+    title: "Harry Potter",
+    img: "https://static1.moviewebimages.com/wordpress/wp-content/uploads/movie/QHEDmRuOHWBIoJ0BKRf3MXuG7I3q8I.jpg",
+    trailer: "Harry Potter and the Half-Blood Prince ｜ Official Trailer.mp4"
+  },
+  "the incredibles": {
+    title: "The Incredibles",
+    img: "https://picfiles.alphacoders.com/346/346533.jpg",
+    trailer: "Incredibles 2 Official Trailer.mp4"
+  },
+  "moana": {
+    title: "Moana",
+    img: "https://image.tmdb.org/t/p/original/z6mmye1efC6Q42HvrYQsZNOeH9H.jpg",
+    trailer: "Moana 2 ｜ Official Trailer.mp4"
   }
 };
+
 const carousels = document.querySelectorAll(".carousel-container");
 
 carousels.forEach(container => {

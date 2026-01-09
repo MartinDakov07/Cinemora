@@ -12,13 +12,13 @@ document.querySelectorAll('.card').forEach(card => {
   const video = card.querySelector('.trailer');
   
   card.addEventListener('mouseenter', () => {
-    video.currentTime = 0; // Start from beginning
+    video.currentTime = 30; // Start from beginning
     video.play();
   });
 
   card.addEventListener('mouseleave', () => {
     video.pause();
-    video.currentTime = 0; // Reset for next hover
+    video.currentTime = 30; // Reset for next hover
   });
 });
 document.addEventListener("DOMContentLoaded", () => {
@@ -183,6 +183,15 @@ const searchDatabase = {
   "harry potter": {page: "kids.html"},
   "the incredibles": {page: "kids.html"},
   "moana": {page: "kids.html"},
+  "deadpool and wolverine": {page: "movies.html"},
+  "dune: part two": {page: "movies.html"},
+  "kong vs godzilla": {page: "movies.html"},
+  "oppenheimer": {page: "movies.html"},
+  "avatar": {page: "movies.html"},
+  "john wick 4": {page: "movies.html"},
+  "interstellar": {page: "movies.html"},
+  "transformers": {page: "movies.html"},
+  "the batman": {page: "movies.html"},
 };
 
 

@@ -91,6 +91,91 @@
       opacity: 1;
       transform: translateY(0px) scale(1);
     }
+    .card:hover{
+      transform:none;
+    }
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card:hover .thumbnail{
+  filter: brightness(60%);
+}
+.card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  width: 100%;
+  background: linear-gradient(transparent);
+}
+
+.card-info h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.card-info p {
+  margin: 5px 0 10px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.card img,
+.card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.card .trailer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card:hover .thumbnail {
+  opacity: 1;
+}
+/* Card positioning */
+.card {
+  position: relative;
+  overflow: hidden;
+}
+/* Smooth image transition */
+.thumbnail {
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* Hide description by default */
+.movie-desc {
+  font-size: 13px;
+  color: #f0f0f0;  /* Very light gray / near white */
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);  /* Strong shadow for contrast */
+  margin-top: 6px;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  max-width:80%;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+/* Show description on hover */
+.card:hover .movie-desc {
+  opacity: 1;
+  max-height: 100px;
+}
+
+/* Make text pop on hover */
+.card:hover .card-info {
+  transform: translateY(-4px);
+}
+
+.card-info {
+  transition: transform 0.3s ease;
+}
   </style>
 </head>
 
@@ -108,6 +193,9 @@
     <a href="movies.html" class="active">Movies</a>
     <a href="kids.html">Kids</a>
     <a href="mylist.html">My List</a>
+  <div class="search">
+  <input type="text" id="searchInput" placeholder="Search..." autocomplete="off" />
+  <div id="suggestions" class="suggestions-box"></div>
   </nav>
 </header>
 
@@ -117,67 +205,290 @@
   <!-- MOVIE 1 -->
   <a href="sinners.html" class="card"
      data-title="Sinners"
-     data-img="https://www.chennaitop10.com/wp-content/uploads/2025/09/sinners-poster-2025.jpg"
+     data-img="https://resizing.flixster.com/VR3Tfr9zpNllsU6RchvnbhGmPkc=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzL2VhOTdiZDNjLTlmODQtNGNlYi1iZWYwLWNkYjY2YmI5YzZjYS5qcGc="
      data-page="sinners">
 
     <div class="heart-btn"
          data-title="Sinners"
-         data-img="https://www.chennaitop10.com/wp-content/uploads/2025/09/sinners-poster-2025.jpg"
+         data-img="https://resizing.flixster.com/VR3Tfr9zpNllsU6RchvnbhGmPkc=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzL2VhOTdiZDNjLTlmODQtNGNlYi1iZWYwLWNkYjY2YmI5YzZjYS5qcGc="
          data-page="sinners">💜</div>
 
     <img class="thumbnail" src="https://www.chennaitop10.com/wp-content/uploads/2025/09/sinners-poster-2025.jpg" alt="Sinners" />
-    <video class="trailer" muted preload="metadata">
-      <source src="Sinners ｜ Official Trailer.mp4" type="video/mp4" />
-    </video>
     <div class="card-info">
       <h2>SINNERS</h2>
       <p>Dance with the Devil</p>
-      <button class="play-btn">▶ Play</button>
+      <p class="movie-desc">
+         In a world haunted by guilt and buried secrets, a group of lives collide as temptation pulls them toward destruction. As past sins resurface, each choice tightens a grip that may be impossible to escape.
+      </p>
     </div>
   </a>
 
   <!-- MOVIE 2 -->
   <a href="minecraft.html" class="card"
      data-title="A Minecraft Movie"
-     data-img="https://image.tmdb.org/t/p/original/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg"
+     data-img="https://cdn.theatertoolkit.com/media/pccmovies/features/posters/a-minecraft-movie-db8760-Large.jpg"
      data-page="minecraft">
 
     <div class="heart-btn"
          data-title="A Minecraft Movie"
-         data-img="https://image.tmdb.org/t/p/original/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg"
+         data-img="https://cdn.theatertoolkit.com/media/pccmovies/features/posters/a-minecraft-movie-db8760-Large.jpg"
          data-page="minecraft">💜</div>
 
     <img class="thumbnail" src="https://image.tmdb.org/t/p/original/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg" alt="Minecraft Movie" />
-    <video class="trailer" muted preload="metadata">
-      <source src="A Minecraft Movie ｜ Official Trailer.mp4" type="video/mp4" />
-    </video>
     <div class="card-info">
       <h2>A Minecraft Movie</h2>
       <p>Get ready to craft your world</p>
-      <button class="watch-btn">Watch Now</button>
+        <p class="movie-desc">
+         When their peaceful world is threatened, unlikely heroes are pulled into an epic journey across vast landscapes built block by block. To survive, they must learn that imagination, courage, and teamwork are the ultimate tools.
+      </p>
     </div>
   </a>
 
   <!-- MOVIE 3 -->
   <a href="f1.html" class="card"
      data-title="F1"
-     data-img="https://www.wellfleetcinemas.com/wp-content/uploads/F1MOVIE_GEN_Dated_1920x1080.jpg"
+     data-img="https://all.web.img.acsta.net/r_2500_x/img/49/78/49787f68c115177a429f394692f791c2.jpg"
      data-page="f1">
 
     <div class="heart-btn"
          data-title="F1"
-         data-img="https://www.wellfleetcinemas.com/wp-content/uploads/F1MOVIE_GEN_Dated_1920x1080.jpg"
+         data-img="https://all.web.img.acsta.net/r_2500_x/img/49/78/49787f68c115177a429f394692f791c2.jpg"
          data-page="f1">💜</div>
 
     <img class="thumbnail" src="https://www.wellfleetcinemas.com/wp-content/uploads/F1MOVIE_GEN_Dated_1920x1080.jpg" alt="F1 Movie" />
-    <video class="trailer" muted preload="metadata">
-      <source src="F1® The Movie ｜ Official Trailer.mp4" type="video/mp4" />
-    </video>
     <div class="card-info">
       <h2>F1</h2>
       <p>Available Exclusively</p>
+        <p class="movie-desc">
+Set in the unforgiving world of Formula One, the film follows drivers chasing greatness at impossible speeds. As rivalries ignite and pressure mounts, ambition pushes them to risk everything for a place in history.
+      </p>
     </div>
   </a>
+
+   <!-- MOVIE 4 -->
+<a href="deadpool.html" class="card"
+   data-title="Deadpool & Wolverine"
+   data-img="https://image.tmdb.org/t/p/original/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg"
+   data-page="deadpool">
+
+  <div class="heart-btn"
+       data-title="Deadpool & Wolverine"
+       data-img="https://image.tmdb.org/t/p/original/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg"
+       data-page="deadpool">💜</div>
+
+  <img class="thumbnail"
+       src="https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/f93c8318-f9a6-4985-bb8f-5a78ac09e993/compose?aspectRatio=1.78&format=webp&width=1200"
+       alt="Deadpool & Wolverine" />
+  <div class="card-info">
+    <h2>Deadpool & Wolverine</h2>
+    <p>Everyone deserves a happy ending</p>
+      <p class="movie-desc">
+         Forced into an uneasy alliance, Deadpool and Wolverine face a mission that spirals into chaos. As enemies close in, their brutal combat skills and clashing personalities turn the fight into a wild, unpredictable battle.
+      </p>
+  </div>
+</a>
+
+<!-- MOVIE 5 -->
+<a href="dune2.html" class="card"
+   data-title="Dune: Part Two"
+   data-img="https://image.tmdb.org/t/p/original/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg"
+   data-page="dune2">
+
+  <div class="heart-btn"
+       data-title="Dune: Part Two"
+       data-img="https://image.tmdb.org/t/p/original/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg"
+       data-page="dune2">💜</div>
+
+  <img class="thumbnail"
+       src="https://image.tmdb.org/t/p/original/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg"
+       alt="Dune Part Two" />
+  <div class="card-info">
+    <h2>DUNE: PART TWO</h2>
+    <p>Long live the fighters</p>
+      <p class="movie-desc">
+Paul Atreides embraces his destiny as he joins the Fremen to wage war against those who destroyed his family. As prophecy and power collide, his rise threatens to reshape the fate of Arrakis and the entire universe.
+      </p>
+  </div>
+</a>
+
+<!-- MOVIE 6 -->
+<a href="godzilla-kong.html" class="card"
+   data-title="Godzilla x Kong"
+   data-img="https://androme.melitacable.com/media/images/vod/53/e9/ad6acd4c-40cd-42a0-8548-f5715b9f283e-default.jpg?form=vod-card-2"
+   data-page="godzilla-kong">
+
+  <div class="heart-btn"
+       data-title="Godzilla x Kong"
+       data-img="https://androme.melitacable.com/media/images/vod/53/e9/ad6acd4c-40cd-42a0-8548-f5715b9f283e-default.jpg?form=vod-card-2"
+       data-page="godzilla-kong">💜</div>
+
+  <img class="thumbnail"
+       src="https://wikizilla.org/w/images/8/80/Godzilla_vs._Kong_Banner_%2804-27-20%29.jpg"
+       alt="Godzilla x Kong" />
+  <div class="card-info">
+    <h2>GODZILLA x KONG</h2>
+    <p>Rise together or fall alone</p>
+    <p class="movie-desc">
+When two legendary titans collide, the fate of humanity hangs in the balance. As Godzilla and Kong clash, secrets of their ancient rivalry are revealed, forcing unlikely alliances to save the world from destruction.
+      </p>
+  </div>
+</a>
+
+<!-- MOVIE 7 -->
+<a href="oppenheimer.html" class="card"
+   data-title="Oppenheimer"
+   data-img="https://image.tmdb.org/t/p/original/ptpr0kGAckfQkJeJIt8st5dglvd.jpg"
+   data-page="oppenheimer">
+
+  <div class="heart-btn"
+       data-title="Oppenheimer"
+       data-img="https://image.tmdb.org/t/p/original/ptpr0kGAckfQkJeJIt8st5dglvd.jpg"
+       data-page="oppenheimer">💜</div>
+
+  <img class="thumbnail"
+       src="https://image.tmdb.org/t/p/original/ptpr0kGAckfQkJeJIt8st5dglvd.jpg"
+       alt="Oppenheimer" />
+
+  
+
+  <div class="card-info">
+    <h2>OPPENHEIMER</h2>
+    <p>The world forever changes</p>
+        <p class="movie-desc">
+A gripping historical drama following J. Robert Oppenheimer, the physicist behind the atomic bomb. As science, morality, and politics collide, he faces the ultimate question: can mankind handle the power he has unleashed?
+      </p>
+  </div>
+</a>
+
+<!-- MOVIE 8 -->
+<a href="avatar2.html" class="card"
+   data-title="Avatar: The Way of Water"
+   data-img="https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg"
+   data-page="avatar2">
+
+  <div class="heart-btn"
+       data-title="Avatar: The Way of Water"
+       data-img="https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg"
+       data-page="avatar2">💜</div>
+
+  <img class="thumbnail"
+       src="https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg"
+       alt="Avatar Way of Water" />
+
+ 
+
+  <div class="card-info">
+    <h2>AVATAR</h2>
+    <p>The way of water connects all things</p>
+        <p class="movie-desc">
+Jake Sully and Neytiri navigate a breathtaking, perilous underwater world. As new threats emerge to challenge their home, they must protect Pandora’s future while discovering the true depths of family and unity.
+      </p>
+  </div>
+</a>
+
+<!-- MOVIE 9 -->
+<a href="johnwick4.html" class="card"
+   data-title="John Wick: Chapter 4"
+   data-img="https://wallpapers.com/images/hd/john-wick-4-4cfzhn8yfccpystb.jpg"
+   data-page="johnwick4">
+
+  <div class="heart-btn"
+       data-title="John Wick: Chapter 4"
+       data-img="https://image.tmdb.org/t/p/original/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg"
+       data-page="johnwick4">💜</div>
+
+  <img class="thumbnail"
+       src="https://wallpapers.com/images/hd/john-wick-4-4cfzhn8yfccpystb.jpg"
+       alt="John Wick 4" />
+
+
+
+  <div class="card-info">
+    <h2>JOHN WICK 4</h2>
+    <p>No way back, one way out</p>
+        <p class="movie-desc">
+The unstoppable assassin faces his deadliest enemies yet in a relentless quest for survival. Betrayals, high-octane action, and deadly duels push John Wick to the limits of vengeance and endurance.
+      </p>
+  </div>
+</a>
+
+<!-- MOVIE 10 -->
+<a href="interstellar.html" class="card"
+   data-title="Interstellar"
+   data-img="https://s3.amazonaws.com/nightjarprod/content/uploads/sites/130/2021/08/19085635/gEU2QniE6E77NI6lCU6MxlNBvIx-scaled.jpg"
+   data-page="interstellar">
+
+  <div class="heart-btn"
+       data-title="Interstellar"
+       data-img="https://s3.amazonaws.com/nightjarprod/content/uploads/sites/130/2021/08/19085635/gEU2QniE6E77NI6lCU6MxlNBvIx-scaled.jpg"
+       data-page="interstellar">💜</div>
+
+  <img class="thumbnail"
+       src="https://image.tmdb.org/t/p/original/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"
+       alt="Interstellar" />
+
+
+
+  <div class="card-info">
+    <h2>INTERSTELLAR</h2>
+    <p>Mankind was born on Earth. It was never meant to die here.</p>
+        <p class="movie-desc">
+In a dying Earth, a team of explorers travels through a wormhole seeking a new home for humanity. Love, time, and sacrifice intertwine as they confront the vast mysteries of space and the survival of the human race.
+      </p>
+  </div>
+</a>
+
+<!-- MOVIE 11 -->
+<a href="transformers.html" class="card"
+   data-title="Transformers: Rise of the Beasts"
+   data-img="https://image.tmdb.org/t/p/original/gPbM0MK8CP8A174rmUwGsADNYKD.jpg"
+   data-page="transformers">
+
+  <div class="heart-btn"
+       data-title="Transformers: Rise of the Beasts"
+       data-img="https://image.tmdb.org/t/p/original/gPbM0MK8CP8A174rmUwGsADNYKD.jpg"
+       data-page="transformers">💜</div>
+
+  <img class="thumbnail"
+       src="https://image.tmdb.org/t/p/original/gPbM0MK8CP8A174rmUwGsADNYKD.jpg"
+       alt="Transformers Rise of the Beasts" />
+
+
+
+  <div class="card-info">
+    <h2>TRANSFORMERS</h2>
+    <p>Unite or fall</p>
+      <p class="movie-desc">
+The battle between Autobots and Decepticons reaches new heights as ancient Transformers awaken. Heroes on both sides must unite to stop a threat that could destroy Earth and reshape the fate of the universe.
+      </p>
+  </div>
+</a>
+
+<!-- MOVIE 12 -->
+<a href="thebatman.html" class="card"
+   data-title="The Batman"
+   data-img="https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg"
+   data-page="thebatman">
+
+  <div class="heart-btn"
+       data-title="The Batman"
+       data-img="https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg"
+       data-page="thebatman">💜</div>
+
+  <img class="thumbnail"
+       src="https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg"
+       alt="The Batman" />
+
+
+
+  <div class="card-info">
+    <h2>THE BATMAN</h2>
+    <p>Unmask the truth</p>
+      <p class="movie-desc">
+Gotham descends into darkness as a mysterious killer emerges, leaving clues only the Dark Knight can follow. Batman must navigate corruption, uncover hidden truths, and confront his own demons to save the city he swore to protect.
+      </p>
+  </div>
+</a>
 
 </main>
 </div>
@@ -257,6 +568,101 @@ document.querySelectorAll(".heart-btn").forEach(btn => {
   });
 });
 markSavedHearts();
+// === SEARCH SYSTEM ===
+const searchDatabase = {
+  "breaking bad": { page: "series/breakingbad.html" },
+  "better call saul": { page: "series/bettercallsaul.html" },
+  "prison break": { page: "series/prisonbreak.html" },
+  "you": { page: "series/you.html" },
+  "dexter": {page: "series/dexter.html"},
+  "reacher": {page: "series/reacher.html"},
+  "thewalkingdead": {page: "series/thewalkingdead.html"},
+  "aliceinborderland": {page: "series/thewalkingdead.html"},
+  "f1": {page:"f1.html"},
+  "sinners": { page: "sinners.html" },
+  "a minecraft movie": { page: "minecraft.html" },
+  "frozen": {page: "kids.html"},
+  "minions": {page: "kids.html"},
+  "peppa pig": {page: "kids.html"},
+  "paw patrol": {page: "kids.html"},
+  "toy story": {page: "kids.html"},
+  "finding nemo": {page: "kids.html"},
+  "kung fu panda": {page: "kids.html"},
+  "cars": {page: "kids.html"},
+  "how to train your dragon": {page: "kids.html"},
+  "harry potter": {page: "kids.html"},
+  "the incredibles": {page: "kids.html"},
+  "moana": {page: "kids.html"},
+  "deadpool and wolverine": {page: "movies.html"},
+  "dune: part two": {page: "movies.html"},
+  "kong vs godzilla": {page: "movies.html"},
+  "oppenheimer": {page: "movies.html"},
+  "avatar": {page: "movies.html"},
+  "john wick 4": {page: "movies.html"},
+  "interstellar": {page: "movies.html"},
+  "transformers": {page: "movies.html"},
+  "the batman": {page: "movies.html"},
+};
+
+
+const searchInput = document.getElementById("searchInput");
+const suggestionsBox = document.getElementById("suggestions");
+
+// === AUTO-SUGGEST SYSTEM ===
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
+  suggestionsBox.innerHTML = "";
+
+  if (query.length === 0) {
+    suggestionsBox.style.display = "none";
+    return;
+  }
+
+  // get titles from DB
+  const titles = Object.keys(searchDatabase);
+
+  // get matches
+  const matches = titles.filter(t => t.includes(query));
+
+  if (matches.length === 0) {
+    suggestionsBox.style.display = "none";
+    return;
+  }
+
+  suggestionsBox.style.display = "block";
+
+  matches.forEach(title => {
+    const div = document.createElement("div");
+    div.textContent = title;
+
+    div.onclick = () => {
+      const itemPage = searchDatabase[title].page;
+      window.location.href = itemPage;
+    };
+
+    suggestionsBox.appendChild(div);
+  });
+});
+// === ENTER KEY SEARCH HANDLER ===
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    const query = searchInput.value.toLowerCase().trim();
+
+    // If empty → do nothing
+    if (!query) return;
+
+    // If match exists → go to movie
+    if (searchDatabase[query]) {
+      window.location.href = searchDatabase[query].page;
+      return;
+    }
+
+    // Otherwise → go to "Not Found" page
+    window.location.href = "notfound.html?query=" + encodeURIComponent(query);
+  }
+});
+
+
 </script>
 
 </body>

@@ -157,6 +157,33 @@
   opacity: 1;
   transform: translateY(0px) scale(1);
 }
+.genre-filter {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.genre-btn {
+  padding: 10px 22px;
+  border-radius: 25px;
+  background: rgba(30, 30, 50, 0.9);
+  color: white;
+  border: 1px solid #6c63ff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.genre-btn:hover {
+  background: #6c63ff;
+}
+
+.genre-btn.active {
+  background: #6c63ff;
+  box-shadow: 0 0 10px #6c63ff;
+}
 
 
   </style>
@@ -174,13 +201,27 @@
     <a href="movies.html">Movies</a>
     <a href="kids.html">Kids</a>
     <a href="mylist.html">My List</a>
+  <div class="search">
+  <input type="text" id="searchInput" placeholder="Search..." autocomplete="off" />
+  <div id="suggestions" class="suggestions-box"></div>
   </nav>
+  
 </header>
+<div class="genre-filter">
+  <button class="genre-btn active" data-genre="all">All</button>
+  <button class="genre-btn" data-genre="crime">Crime</button>
+  <button class="genre-btn" data-genre="thriller">Thriller</button>
+  <button class="genre-btn" data-genre="action">Action</button>
+  <button class="genre-btn" data-genre="drama">Drama</button>
+  <button class="genre-btn" data-genre="fantasy">Fantasy</button>
+</div>
+
 <div class="carousel">
 
       <div class="carousel-item"
            data-title="Breaking Bad"
            data-page="breakingbad"
+           data-genre="crime"
            data-img="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg">
         <img src="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg" alt="Breaking Bad">
         <div class="heart-btn"
@@ -192,6 +233,7 @@
       <div class="carousel-item"
            data-title="Better Call Saul"
            data-page="bettercallsaul"
+           data-genre="crime"
            data-img="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295">
         <img src="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295" alt="Better Call Saul">
         <div class="heart-btn"
@@ -203,6 +245,7 @@
       <div class="carousel-item"
            data-title="Dexter: Resurrection"
            data-page="dexter"
+           data-genre="thriller"
            data-img="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg">
         <img src="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg" alt="Dexter: Resurrection">
         <div class="heart-btn"
@@ -214,6 +257,7 @@
       <div class="carousel-item"
            data-title="Prison Break"
            data-page="prisonbreak"
+           data-genre="action"
            data-img="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg">
         <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg" alt="Prison Break">
         <div class="heart-btn"
@@ -225,6 +269,7 @@
       <div class="carousel-item"
            data-title="Alice in Borderland"
            data-page="aliceinborderland"
+           data-genre="fantasy"
            data-img="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
         <img src="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Alice in Borderland">
         <div class="heart-btn"
@@ -236,6 +281,7 @@
       <div class="carousel-item"
            data-title="Reacher"
            data-page="reacher"
+           data-genre="action"
            data-img="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg">
         <img src="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg" alt="Reacher">
         <div class="heart-btn"
@@ -247,6 +293,7 @@
       <div class="carousel-item"
            data-title="The Walking Dead"
            data-page="thewalkingdead"
+           data-genre="thriller"
            data-img="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2">
         <img src="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2" alt="The Walking Dead">
         <div class="heart-btn"
@@ -258,6 +305,7 @@
       <div class="carousel-item"
            data-title="You"
            data-page="you"
+           data-genre="drama"
            data-img="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
         <img src="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="You">
         <div class="heart-btn"
@@ -355,6 +403,120 @@ document.querySelectorAll(".heart-btn").forEach(btn => {
 });
 
 markSavedHearts();
+const genreButtons = document.querySelectorAll(".genre-btn");
+const cards = document.querySelectorAll(".carousel-item");
+
+genreButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    // Active button highlight
+    genreButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const selectedGenre = btn.dataset.genre;
+
+    cards.forEach(card => {
+      if (selectedGenre === "all" || card.dataset.genre === selectedGenre) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+});
+// === SEARCH SYSTEM ===
+const searchDatabase = {
+  "breaking bad": { page: "series/breakingbad.html" },
+  "better call saul": { page: "series/bettercallsaul.html" },
+  "prison break": { page: "series/prisonbreak.html" },
+  "you": { page: "series/you.html" },
+  "dexter": {page: "series/dexter.html"},
+  "reacher": {page: "series/reacher.html"},
+  "thewalkingdead": {page: "series/thewalkingdead.html"},
+  "aliceinborderland": {page: "series/thewalkingdead.html"},
+  "f1": {page:"f1.html"},
+  "sinners": { page: "sinners.html" },
+  "a minecraft movie": { page: "minecraft.html" },
+  "frozen": {page: "kids.html"},
+  "minions": {page: "kids.html"},
+  "peppa pig": {page: "kids.html"},
+  "paw patrol": {page: "kids.html"},
+  "toy story": {page: "kids.html"},
+  "finding nemo": {page: "kids.html"},
+  "kung fu panda": {page: "kids.html"},
+  "cars": {page: "kids.html"},
+  "how to train your dragon": {page: "kids.html"},
+  "harry potter": {page: "kids.html"},
+  "the incredibles": {page: "kids.html"},
+  "moana": {page: "kids.html"},
+  "deadpool and wolverine": {page: "movies.html"},
+  "dune: part two": {page: "movies.html"},
+  "kong vs godzilla": {page: "movies.html"},
+  "oppenheimer": {page: "movies.html"},
+  "avatar": {page: "movies.html"},
+  "john wick 4": {page: "movies.html"},
+  "interstellar": {page: "movies.html"},
+  "transformers": {page: "movies.html"},
+  "the batman": {page: "movies.html"},
+};
+
+
+const searchInput = document.getElementById("searchInput");
+const suggestionsBox = document.getElementById("suggestions");
+
+// === AUTO-SUGGEST SYSTEM ===
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
+  suggestionsBox.innerHTML = "";
+
+  if (query.length === 0) {
+    suggestionsBox.style.display = "none";
+    return;
+  }
+
+  // get titles from DB
+  const titles = Object.keys(searchDatabase);
+
+  // get matches
+  const matches = titles.filter(t => t.includes(query));
+
+  if (matches.length === 0) {
+    suggestionsBox.style.display = "none";
+    return;
+  }
+
+  suggestionsBox.style.display = "block";
+
+  matches.forEach(title => {
+    const div = document.createElement("div");
+    div.textContent = title;
+
+    div.onclick = () => {
+      const itemPage = searchDatabase[title].page;
+      window.location.href = itemPage;
+    };
+
+    suggestionsBox.appendChild(div);
+  });
+});
+// === ENTER KEY SEARCH HANDLER ===
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    const query = searchInput.value.toLowerCase().trim();
+
+    // If empty → do nothing
+    if (!query) return;
+
+    // If match exists → go to movie
+    if (searchDatabase[query]) {
+      window.location.href = searchDatabase[query].page;
+      return;
+    }
+
+    // Otherwise → go to "Not Found" page
+    window.location.href = "notfound.html?query=" + encodeURIComponent(query);
+  }
+});
+
 
 </script>
 <div id="toast" class="toast"></div>

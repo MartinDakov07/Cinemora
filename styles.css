@@ -257,7 +257,7 @@ body {
 .featured-section {
   display: flex;
   justify-content: center;
-  gap: 25px;
+  gap: 55px;
   padding: 60px;
   flex-wrap: wrap;
 }
@@ -268,11 +268,15 @@ body {
   overflow: hidden;
   width: 30%;
   min-width: 280px;
+  aspect-ratio: 16 / 9;
   color:white;
-  transition: transform 0.3s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  z-index:1;
 }
 .card:hover {
-  transform: scale(1.05);
+  transform: scale(1.15);
+  z-index:10;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
 }
 
 .card img {
