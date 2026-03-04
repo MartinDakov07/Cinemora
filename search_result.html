@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Result</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background: #0e0e12;
+      color: white;
+      text-align: center;
+      padding: 40px;
+      font-family: Arial, sans-serif;
+    }
+
+    .result-card {
+      width: 260px;
+      margin: 40px auto;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .result-card:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.3);
+    }
+
+    .result-card img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+
+    h3 {
+      margin-bottom: 12px;
+      text-transform: capitalize;
+    }
+
+    .home-btn {
+      margin-top: 30px;
+      padding: 10px 25px;
+      background: #6c63ff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+
+    .home-btn:hover {
+      background: #8e84ff;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Search Result</h2>
+  <div id="result"></div>
+
+  <button class="home-btn" onclick="location.href='index.html'">← Back to Home</button>
+
+  <script>
+    // Receive found item
+    const params = new URLSearchParams(window.location.search);
+    const item = params.get("item");
+
+    // Map item to image + detail page
+    const db = {
+      "sinners": {
+        img: "https://www.chennaitop10.com/wp-content/uploads/2025/09/sinners-poster-2025.jpg",
+        page: "sinners.html"
+      },
+      "a minecraft movie": {
+        img: "https://image.tmdb.org/t/p/original/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg",
+        page: "minecraft.html"
+      },
+      "minecraft": {
+        img: "https://image.tmdb.org/t/p/original/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg",
+        page: "minecraft.html"
+      },
+      "f1": {
+        img: "https://www.wellfleetcinemas.com/wp-content/uploads/F1MOVIE_GEN_Dated_1920x1080.jpg",
+        page: "f1.html"
+      },
+      "breaking bad": {
+        img: "https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg",
+        page: "series.html"
+      },
+      "better call saul": {
+        img: "https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg",
+        page: "series.html"
+      },
+      "dexter": {
+        img: "https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg",
+        page: "series.html"
+      },
+      "prison break": {
+        img: "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg",
+        page: "series.html"
+      },
+      "alice in borderland": {
+        img: "https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        page: "series.html"
+      },
+      "reacher": {
+        img: "https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg",
+        page: "series.html"
+      },
+      "the walking dead": {
+        img: "https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp",
+        page: "series.html"
+      },
+      "you": {
+        img: "https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        page: "series.html"
+      }
+    };
+
+    const resultDiv = document.getElementById("result");
+
+    if (item && db[item]) {
+      resultDiv.innerHTML = `
+        <div class="result-card" onclick="location.href='${db[item].page}'">
+          <h3>${item}</h3>
+          <img src="${db[item].img}" alt="${item}">
+        </div>
+      `;
+    } else {
+      resultDiv.innerHTML = "<p>No result found.</p>";
+    }
+  </script>
+</body>
+</html>

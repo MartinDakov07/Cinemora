@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cinemora Streaming</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .navbar {
+      width: 100%;
+      background: rgba(15, 16, 22, 0.9);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+    }
+    .navbar h3{
+        position:absolute;
+        left:550px;
+        color:var(--accent2);
+    }
+    .navbar .home {
+      color: var(--accent, #6c63ff);
+      text-decoration: none;
+      margin-left:30px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .navbar .nav-links{
+      margin-right:90px;
+    }
+      .navbar .home:hover {
+      color: var(--accent2, #a44cf5);
+    }
+    .nav-links a:hover,
+    .nav-links .active {
+      color: #6c63ff;
+      text-shadow: 0 0 10px #6c63ff;
+    }
+.carousel {
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+  gap: 40px;
+  justify-items: center;
+  margin: 30px 120px;
+  animation:none !important;
+}
+
+
+.carousel img {
+  width: 200px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.carousel img:hover {
+  transform: scale(1.05);
+}
+/* ===== CAROUSEL OVERLAY ON HOLD ===== */
+/* ===== HOVER TO REVEAL TITLE IN CAROUSEL ===== */
+.carousel-item {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.carousel-item img {
+  width: 200px;
+  border-radius: 10px;
+  cursor:pointer;
+  display: block;
+  transition:none;
+  user-select: none;
+}
+/* === FILTER ANIMATION === */
+/* Enable transform-based animation */
+.carousel-item {
+  transition: transform 0.45s cubic-bezier(.4,0,.2,1),
+              opacity 0.35s ease;
+  will-change: transform;
+}
+
+/* Hidden cards */
+.carousel-item.filtered-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/* Hidden state */
+.carousel-item.hide {
+  opacity: 0;
+  transform: scale(0.85) translateY(20px);
+  pointer-events: none;
+}
+/* Overlay (hidden by default) */
+.carousel-item::after {
+  content: attr(data-title);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+
+/* Show overlay when hovering */
+.carousel-item:hover::after {
+  opacity: 1;
+}
+
+/* Slight darkening effect on hover */
+.carousel-item:hover img {
+  filter: brightness(0.7);
+}
+.heart-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 26px;
+  cursor: pointer;
+  user-select: none;
+  color: #8e68ff;
+  filter: drop-shadow(0 0 3px black);
+  transition: transform 0.2s ease;
+  pointer-events: auto;
+  z-index: 10;     /* makes sure it sits above image */
+}
+
+/* Smooth pop animation when heart is toggled */
+.heart-btn.hearted {
+  animation: pop 0.25s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35); }
+  100% { transform: scale(1.15); }
+}
+
+/* Floating toast notification with slide + fade */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(20, 20, 30, 0.95);
+  color: white;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 9999;
+  border-left: 4px solid #8e68ff;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0px) scale(1);
+}
+.genre-filter {
+  display: none;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.genre-btn {
+  padding: 10px 22px;
+  border-radius: 25px;
+  background: rgba(30, 30, 50, 0.9);
+  color: white;
+  border: 1px solid #6c63ff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.genre-btn:hover {
+  background: #6c63ff;
+}
+
+.genre-btn.active {
+  background: #6c63ff;
+  box-shadow: 0 0 10px #6c63ff;
+}
+.dropdown {
+  position: relative;
+  padding-bottom: 12px; /* creates a hover buffer */
+}
+.dropdown:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 14px;
+  background: transparent;
+}
+
+
+/* BUTTON */
+.dropbtn {
+  color: white;
+  text-decoration: none;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+}
+
+/* CARET ICON */
+.caret {
+  font-size: 12px;
+  transition: transform 0.3s ease;
+}
+
+/* DROPDOWN CONTAINER */
+.dropdown-content {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  background: rgba(15, 15, 15, 0.95);
+  min-width: 200px;
+  border-radius: 10px;
+  padding: 8px 0;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+  opacity: 0;
+  transform: translateY(10px) scale(0.95);
+  pointer-events: none;
+  transition: all 0.35s ease;
+  z-index: 1000;
+}
+
+/* LINKS */
+.dropdown-content a {
+  color: #fff !important;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+/* LINK ICONS */
+.dropdown-content i {
+  color: #e090ff;
+  min-width: 18px;
+}
+
+/* HOVER EFFECT */
+.dropdown-content a:hover {
+  background: linear-gradient(90deg, #9b59b6, #6c3483);
+  transform: translateX(6px);
+}
+.dropdown.disable-hover .dropdown-content {
+  opacity: 0;
+  transform: translateY(10px) scale(0.95);
+  pointer-events: none;
+}
+/* SHOW DROPDOWN */
+.dropdown:hover .dropdown-content{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+/* CARET ROTATE */
+.dropdown:hover .caret {
+  transform: rotate(180deg);
+}
+.dropdown.force-close .dropdown-content {
+  opacity: 0 !important;
+  transform: translateY(10px) scale(0.95) !important;
+  pointer-events: none !important;
+}
+
+/* BUTTON COLOR */
+.dropdown:hover .dropbtn {
+  color: #9b59b6;
+}
+
+  </style>
+</head>
+<body>
+<header class="navbar">
+  <div class="logo">
+    <a href="index.html">
+      <img src="cinemora-removebg-preview.png" alt="Cinemora Logo" />
+    </a>
+    <span>Your World of Entertainment</span>
+    <a href="javascript:void(0)" class="home" onclick="goBack()">← Back</a>
+    <h3>Series</h3>
+  </div>
+<nav class="nav-links">
+<div class="dropdown">
+  <a href="series.html" class="dropbtn">
+    <i class="fa-solid fa-tv"></i> Series
+    <i class="fa-solid fa-chevron-down caret"></i>
+  </a>
+    <div class="dropdown-content">
+    <a href="series.html#trending"><i class="fa-solid fa-fire"></i> Trending</a>
+    <a href="series.html#drama"><i class="fa-solid fa-masks-theater"></i> Drama</a>
+    <a href="series.html#action"><i class="fa-solid fa-bolt"></i> Action</a>
+    <a href="series.html#crime"><i class="fa-solid fa-gun"></i> Crime</a>
+    <a href="series.html#fantasy"><i class="fa-solid fa-dragon"></i> Fantasy</a>
+    <a href="series.html#thriller"><i class="fa-solid fa-skull"></i> Thriller</a>
+  </div>
+</div>
+
+
+  <!-- MOVIES DROPDOWN -->
+<div class="dropdown">
+  <a href="movies.html" class="dropbtn">
+    <i class="fa-solid fa-film"></i> Movies
+    <i class="fa-solid fa-chevron-down caret"></i>
+  </a>
+
+  <div class="dropdown-content">
+    <a href="movies.html#mystery"><i class="fa-solid fa-user-secret"></i> Mystery</a>
+    <a href="movies.html#romance"><i class="fa-solid fa-heart"></i> Romance</a>
+    <a href="movies.html#horror"><i class="fa-solid fa-ghost"></i> Horror</a>
+    <a href="movies.html#comedy"><i class="fa-solid fa-face-laugh"></i> Comedy</a>
+    <a href="movies.html#sci-fi"><i class="fa-solid fa-robot"></i> Sci-Fi</a>
+    <a href="movies.html#animation"><i class="fa-solid fa-wand-magic-sparkles"></i> Animation</a>
+    <a href="movies.html#documentary"><i class="fa-solid fa-camera"></i> Documentary</a>
+    <a href="movies.html#musical"><i class="fa-solid fa-music"></i> Musical</a>
+    <a href="movies.html#western"><i class="fa-solid fa-hat-cowboy"></i> Western</a>
+   <a href="movies.html#war"><i class="fa-solid fa-person-military-rifle"></i> War</a>
+    <a href="movies.html#biography"><i class="fa-solid fa-book-open"></i> Biography</a>
+    <a href="movies.html#sports"><i class="fa-solid fa-football"></i> Sports</a>
+  </div>
+</div>
+
+
+      <a href="kids.html">Kids</a>
+      <a href="mylist.html">My List</a>
+  <div class="search">
+  <input type="text" id="searchInput" placeholder="Search..." autocomplete="off" />
+  <div id="suggestions" class="suggestions-box"></div>
+  </div>
+      <a class="subscribe-btn" href="subscribe.html">Subscribe</a>
+</nav>
+  
+</header>
+<div class="genre-filter">
+  <button class="genre-btn active" data-genre="all">All</button>
+  <button class="genre-btn" data-genre="trending">Trending</button>
+  <button class="genre-btn" data-genre="crime">Crime</button>
+  <button class="genre-btn" data-genre="thriller">Thriller</button>
+  <button class="genre-btn" data-genre="action">Action</button>
+  <button class="genre-btn" data-genre="drama">Drama</button>
+  <button class="genre-btn" data-genre="fantasy">Fantasy</button>
+</div>
+
+<div class="carousel">
+
+      <div class="carousel-item"
+           data-title="Breaking Bad"
+           data-page="breakingbad"
+           data-genre="trending crime"
+           data-img="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg">
+        <img src="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg" alt="Breaking Bad">
+        <div class="heart-btn"
+             data-title="Breaking Bad"
+             data-img="https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_FMjpg_UX1000_.jpg"
+             data-page="breakingbad">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Better Call Saul"
+           data-page="bettercallsaul"
+           data-genre="trending crime"
+           data-img="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295">
+        <img src="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295" alt="Better Call Saul">
+        <div class="heart-btn"
+             data-title="Better Call Saul"
+             data-img="https://d32qys9a6wm9no.cloudfront.net/images/tvs/poster/65/efbc5137bb89a67491ff196c50630397_original.jpeg?t=1648631295"
+             data-page="bettercallsaul">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Dexter: Resurrection"
+           data-page="dexter"
+           data-genre="trending thriller"
+           data-img="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg">
+        <img src="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg" alt="Dexter: Resurrection">
+        <div class="heart-btn"
+             data-title="Dexter: Resurrection"
+             data-img="https://images.justwatch.com/poster/331959710/s718/dexter-resurrection.jpg"
+             data-page="dexter">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Prison Break"
+           data-page="prisonbreak"
+           data-genre="trending action"
+           data-img="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg">
+        <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg" alt="Prison Break">
+        <div class="heart-btn"
+             data-title="Prison Break"
+             data-img="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/prison-break-tv-series-poster.jpg"
+             data-page="prisonbreak">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Alice in Borderland"
+           data-page="aliceinborderland"
+           data-genre="fantasy"
+           data-img="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+        <img src="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Alice in Borderland">
+        <div class="heart-btn"
+             data-title="Alice in Borderland"
+             data-img="https://m.media-amazon.com/images/M/MV5BYmMzODA4M2MtMjBmNC00YjFhLTg4NzgtODgyNzE4NWQxMThmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+             data-page="aliceinborderland">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Mindhunter"
+           data-page="mindhunter"
+           data-genre="crime"
+           data-img="https://static1.cbrimages.com/wordpress/wp-content/uploads/sharedimages/2024/04/mindhunter-tv-poster.jpg">
+        <img src="https://static1.cbrimages.com/wordpress/wp-content/uploads/sharedimages/2024/04/mindhunter-tv-poster.jpg" alt="Mindhunter">
+      <div class="heart-btn"
+           data-title="Mindhunter"
+           data-img="https://static1.cbrimages.com/wordpress/wp-content/uploads/sharedimages/2024/04/mindhunter-tv-poster.jpg"
+          data-page="mindhunter">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="Reacher"
+           data-page="reacher"
+           data-genre="action"
+           data-img="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg">
+        <img src="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg" alt="Reacher">
+        <div class="heart-btn"
+             data-title="Reacher"
+             data-img="https://image.tmdb.org/t/p/w1280/31GlRQMiDunO8cl3NxTz34U64rf.jpg"
+             data-page="reacher">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="The Walking Dead"
+           data-page="thewalkingdead"
+           data-genre="trending thriller"
+           data-img="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2">
+        <img src="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2" alt="The Walking Dead">
+        <div class="heart-btn"
+             data-title="The Walking Dead"
+             data-img="https://preview.redd.it/in-your-opinion-when-was-the-walking-dead-at-its-absolute-v0-wy402i0ybbfa1.jpg?auto=webp&s=7ccd2766799c5faf8ec5007db95dd784382d1fa2"
+             data-page="thewalkingdead">💜</div>
+      </div>
+
+      <div class="carousel-item"
+           data-title="You"
+           data-page="you"
+           data-genre="drama"
+           data-img="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+        <img src="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="You">
+        <div class="heart-btn"
+             data-title="You"
+             data-img="https://m.media-amazon.com/images/M/MV5BMTVlYmRhMWQtNmE0Yi00ODM1LWEzMWEtNTQzZGZhODRmZTE0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+             data-page="you">💜</div>
+      </div>
+      <!-- True Detective -->
+<div class="carousel-item"
+     data-title="True Detective"
+     data-page="truedetective"
+     data-genre="crime"
+     data-img="https://www.boredpanda.com/blog/wp-content/uploads/2022/04/hbo-tv-shows-36-624ea3d0e43cf__700.jpg">
+  <img src="https://www.boredpanda.com/blog/wp-content/uploads/2022/04/hbo-tv-shows-36-624ea3d0e43cf__700.jpg" alt="True Detective">
+  <div class="heart-btn"
+       data-title="True Detective"
+       data-img="https://www.boredpanda.com/blog/wp-content/uploads/2022/04/hbo-tv-shows-36-624ea3d0e43cf__700.jpg"
+       data-page="truedetective">💜</div>
+</div>
+
+<!-- Narcos -->
+<div class="carousel-item"
+     data-title="Narcos"
+     data-page="narcos"
+     data-genre="crime"
+     data-img="https://br.web.img2.acsta.net/pictures/15/07/29/14/06/297599.jpg">
+  <img src="https://br.web.img2.acsta.net/pictures/15/07/29/14/06/297599.jpg" alt="Narcos">
+  <div class="heart-btn"
+       data-title="Narcos"
+       data-img="https://br.web.img2.acsta.net/pictures/15/07/29/14/06/297599.jpg"
+       data-page="narcos">💜</div>
+</div>
+<!-- Dark -->
+<div class="carousel-item"
+     data-title="Dark"
+     data-page="dark"
+     data-genre="thriller"
+     data-img="https://media.themoviedb.org/t/p/w500/apbrbWs8M9lyOpJYU5WXrpFbk1Z.jpg">
+  <img src="https://media.themoviedb.org/t/p/w500/apbrbWs8M9lyOpJYU5WXrpFbk1Z.jpg" alt="Dark">
+  <div class="heart-btn"
+       data-title="Dark"
+       data-img="https://media.themoviedb.org/t/p/w500/apbrbWs8M9lyOpJYU5WXrpFbk1Z.jpg"
+       data-page="dark">💜</div>
+</div>
+
+<!-- Squid Game -->
+<div class="carousel-item"
+     data-title="Squid Game"
+     data-page="squidgame"
+     data-genre="thriller"
+     data-img="https://i.mydramalist.com/X6vkX_4f.jpg">
+  <img src="https://i.mydramalist.com/X6vkX_4f.jpg" alt="Squid Game">
+  <div class="heart-btn"
+       data-title="Squid Game"
+       data-img="https://i.mydramalist.com/X6vkX_4f.jpg"
+       data-page="squidgame">💜</div>
+</div>
+
+<!-- Money Heist -->
+<div class="carousel-item"
+     data-title="Money Heist"
+     data-page="moneyheist"
+     data-genre="thriller"
+     data-img="https://cdna.artstation.com/p/assets/images/images/046/103/336/large/illusion-design-money-heist-poster-min.jpg?1644314844">
+  <img src="https://cdna.artstation.com/p/assets/images/images/046/103/336/large/illusion-design-money-heist-poster-min.jpg?1644314844" alt="Money Heist">
+  <div class="heart-btn"
+       data-title="Money Heist"
+       data-img="https://cdna.artstation.com/p/assets/images/images/046/103/336/large/illusion-design-money-heist-poster-min.jpg?1644314844"
+       data-page="moneyheist">💜</div>
+</div>
+
+<!-- Clickbait -->
+<div class="carousel-item"
+     data-title="Clickbait"
+     data-page="clickbait"
+     data-genre="thriller"
+     data-img="https://m.media-amazon.com/images/M/MV5BZmVhMjY0YmYtMTk0YS00NzU2LTg3MTEtOWZlZjAxNDBlOTM2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+  <img src="https://m.media-amazon.com/images/M/MV5BZmVhMjY0YmYtMTk0YS00NzU2LTg3MTEtOWZlZjAxNDBlOTM2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Clickbait">
+  <div class="heart-btn"
+       data-title="Clickbait"
+       data-img="https://m.media-amazon.com/images/M/MV5BZmVhMjY0YmYtMTk0YS00NzU2LTg3MTEtOWZlZjAxNDBlOTM2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+       data-page="clickbait">💜</div>
+</div>
+
+<!-- The Boys -->
+<div class="carousel-item"
+     data-title="The Boys"
+     data-page="theboys"
+     data-genre="trending thriller"
+     data-img="https://static1.moviewebimages.com/wordpress/wp-content/uploads/sharedimages/2024/04/the-boys-season-4-poster-showing-homelander-with-victoria-neuman-surrounded-by-confetti.jpg">
+  <img src="https://static1.moviewebimages.com/wordpress/wp-content/uploads/sharedimages/2024/04/the-boys-season-4-poster-showing-homelander-with-victoria-neuman-surrounded-by-confetti.jpg" alt="The Boys">
+  <div class="heart-btn"
+       data-title="The Boys"
+       data-img="https://static1.moviewebimages.com/wordpress/wp-content/uploads/sharedimages/2024/04/the-boys-season-4-poster-showing-homelander-with-victoria-neuman-surrounded-by-confetti.jpg"
+       data-page="theboys">💜</div>
+</div>
+
+<!-- Into the Night -->
+<div class="carousel-item"
+     data-title="Into the Night"
+     data-page="intothenight"
+     data-genre="thriller"
+     data-img="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/na6fk6WculNrUPCPPQSPNjNyjvX.jpg">
+  <img src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/na6fk6WculNrUPCPPQSPNjNyjvX.jpg" alt="Into the Night">
+  <div class="heart-btn"
+       data-title="Into the Night"
+       data-img="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/na6fk6WculNrUPCPPQSPNjNyjvX.jpg"
+       data-page="intothenight">💜</div>
+</div>
+
+
+<!-- The Wire -->
+<div class="carousel-item"
+     data-title="The Wire"
+     data-page="thewire"
+     data-genre="trending crime"
+     data-img="https://www.themoviedb.org/t/p/original/4lbclFySvugI51fwsyxBTOm4DqK.jpg">
+  <img src="https://www.themoviedb.org/t/p/original/4lbclFySvugI51fwsyxBTOm4DqK.jpg" alt="The Wire">
+  <div class="heart-btn"
+       data-title="The Wire"
+       data-img="https://www.themoviedb.org/t/p/original/4lbclFySvugI51fwsyxBTOm4DqK.jpg"
+       data-page="thewire">💜</div>
+</div>
+
+<!-- Luther -->
+<div class="carousel-item"
+     data-title="Luther"
+     data-page="luther"
+     data-genre="crime"
+     data-img="https://artworks.thetvdb.com/banners/posters/159591-14.jpg">
+  <img src="https://artworks.thetvdb.com/banners/posters/159591-14.jpg" alt="Luther">
+  <div class="heart-btn"
+       data-title="Luther"
+       data-img="https://artworks.thetvdb.com/banners/posters/159591-14.jpg"
+       data-page="luther">💜</div>
+</div>
+
+<!-- Ozark -->
+<div class="carousel-item"
+     data-title="Ozark"
+     data-page="ozark"
+     data-genre="crime"
+     data-img="https://www.showbizjunkies.com/wp-content/uploads/2022/03/ozark-season-4-part-2-official-poster-696x1031.jpg">
+  <img src="https://www.showbizjunkies.com/wp-content/uploads/2022/03/ozark-season-4-part-2-official-poster-696x1031.jpg" alt="Ozark">
+  <div class="heart-btn"
+       data-title="Ozark"
+       data-img="https://www.showbizjunkies.com/wp-content/uploads/2022/03/ozark-season-4-part-2-official-poster-696x1031.jpg"
+       data-page="ozark">💜</div>
+</div>
+<div class="carousel-item"
+     data-title="Jack Ryan"
+     data-page="jack-ryan"
+     data-genre="action"
+     data-img="https://vignette.wikia.nocookie.net/tomclancy/images/f/fa/Tom_Clancy's_Jack_Ryan_Season_2_poster_2.jpg/revision/latest?cb=20190905214520">
+  <img src="https://vignette.wikia.nocookie.net/tomclancy/images/f/fa/Tom_Clancy's_Jack_Ryan_Season_2_poster_2.jpg/revision/latest?cb=20190905214520" alt="Jack Ryan">
+  <div class="heart-btn"
+       data-title="Jack Ryan"
+       data-img="https://vignette.wikia.nocookie.net/tomclancy/images/f/fa/Tom_Clancy's_Jack_Ryan_Season_2_poster_2.jpg/revision/latest?cb=20190905214520"
+       data-page="jack-ryan">💜</div>
+</div>
+<div class="carousel-item"
+     data-title="Daredevil"
+     data-page="daredevil"
+     data-genre="action"
+     data-img="https://tse1.mm.bing.net/th/id/OIP.Co3WtYvqBQoifxpLjGaHyQHaLZ?rs=1&pid=ImgDetMain&o=7&rm=3">
+  <img src="https://tse1.mm.bing.net/th/id/OIP.Co3WtYvqBQoifxpLjGaHyQHaLZ?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Daredevil">
+  <div class="heart-btn"
+       data-title="Daredevil"
+       data-img="https://tse1.mm.bing.net/th/id/OIP.Co3WtYvqBQoifxpLjGaHyQHaLZ?rs=1&pid=ImgDetMain&o=7&rm=3"
+       data-page="daredevil">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="Peaky Blinders"
+     data-page="peaky-blinders"
+     data-genre="trending drama"
+     data-img="https://artworks.thetvdb.com/banners/posters/270915-6.jpg">
+  <img src="https://artworks.thetvdb.com/banners/posters/270915-6.jpg" alt="Peaky Blinders">
+  <div class="heart-btn"
+       data-title="Peaky Blinders"
+       data-img="https://artworks.thetvdb.com/banners/posters/270915-6.jpg"
+       data-page="peaky-blinders">💜</div>
+</div>
+<div class="carousel-item"
+     data-title="Vikings"
+     data-page="vikings"
+     data-genre="action"
+      data-img="https://artworks.thetvdb.com/banners/v4/season/605819/posters/634a2402f0a7e.jpg">
+  <img src="https://artworks.thetvdb.com/banners/v4/season/605819/posters/634a2402f0a7e.jpg" alt="Vikings">
+  <div class="heart-btn"
+       data-title="Vikings"
+       data-img="https://artworks.thetvdb.com/banners/v4/season/605819/posters/634a2402f0a7e.jpg"
+       data-page="vikings">💜</div>
+</div>
+<div class="carousel-item"
+     data-title="Spartacus"
+     data-page="spartacus"
+     data-genre="action"
+     data-img="https://artworks.thetvdb.com/banners/posters/129261-2.jpg">
+  <img src="https://artworks.thetvdb.com/banners/posters/129261-2.jpg" alt="Spartacus">
+  <div class="heart-btn"
+       data-title="Spartacus"
+       data-img="https://artworks.thetvdb.com/banners/posters/129261-2.jpg"
+       data-page="spartacus">💜</div>
+</div>
+<div class="carousel-item"
+     data-title="The Crown"
+     data-page="the-crown"
+     data-genre="drama"
+     data-img="https://artworks.thetvdb.com/banners/posters/305574-4.jpg">
+  <img src="https://artworks.thetvdb.com/banners/posters/305574-4.jpg" alt="The Crown">
+  <div class="heart-btn"
+       data-title="The Crown"
+       data-img="https://artworks.thetvdb.com/banners/posters/305574-4.jpg"
+       data-page="the-crown">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="Pluribus"
+     data-page="pluribus"
+     data-genre="trending sci-fi thriller drama"
+     data-img="https://m.media-amazon.com/images/M/MV5BOWNlM2E1MDMtYmI5MS00NDQ1LWI3NTctM2VlNjQ5OTAxYTNmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+  <img src="https://m.media-amazon.com/images/M/MV5BOWNlM2E1MDMtYmI5MS00NDQ1LWI3NTctM2VlNjQ5OTAxYTNmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Pluribus">
+  <div class="heart-btn"
+       data-title="Pluribus"
+       data-img="https://m.media-amazon.com/images/M/MV5BOWNlM2E1MDMtYmI5MS00NDQ1LWI3NTctM2VlNjQ5OTAxYTNmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+       data-page="pluribus">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="The Last Kingdom"
+     data-page="the-last-kingdom"
+     data-genre="action"
+     data-img="https://image.tmdb.org/t/p/w1280/8eJf0hxgIhE6QSxbtuNCekTddy1.jpg">
+  <img src="https://image.tmdb.org/t/p/w1280/8eJf0hxgIhE6QSxbtuNCekTddy1.jpg" alt="The Last Kingdom">
+  <div class="heart-btn"
+       data-title="The Last Kingdom"
+       data-img="https://image.tmdb.org/t/p/w1280/8eJf0hxgIhE6QSxbtuNCekTddy1.jpg"
+       data-page="the-last-kingdom">💜</div>
+</div>
+<div class="carousel-item"
+     data-title="House of the Dragon"
+     data-page="houseofthedragon"
+     data-genre="action"
+     data-img="https://image.tmdb.org/t/p/w1280/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg">
+  <img src="https://image.tmdb.org/t/p/w1280/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg" alt="House of the Dragon">
+  <div class="heart-btn"
+       data-title="House of the Dragon"
+       data-img="https://image.tmdb.org/t/p/w1280/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg"
+       data-page="houseofthedragon">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="Snowfall"
+     data-page="snowfall"
+     data-genre="crime"
+     data-img="https://wallpaperaccess.com/full/12258638.jpg">
+  <img src="https://wallpaperaccess.com/full/12258638.jpg" alt="Snowfall">
+  <div class="heart-btn"
+       data-title="Snowfall"
+       data-img="https://wallpaperaccess.com/full/12258638.jpg"
+       data-page="snowfall">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="Fargo"
+     data-page="fargo"
+     data-genre="crime"
+     data-img="https://posterspy.com/wp-content/uploads/2016/02/FARGO2.jpg">
+  <img src="https://posterspy.com/wp-content/uploads/2016/02/FARGO2.jpg" alt="Fargo">
+  <div class="heart-btn"
+       data-title="Fargo"
+       data-img="https://posterspy.com/wp-content/uploads/2016/02/FARGO2  .jpg"
+       data-page="fargo">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="Game of Thrones"
+     data-page="gameofthrones"
+     data-genre="trending fantasy drama action"
+     data-img="https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg">
+  <img src="https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg" alt="Game of Thrones">
+  <div class="heart-btn"
+       data-title="Game of Thrones"
+       data-img="https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"
+       data-page="gameofthrones">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="Boardwalk Empire"
+     data-page="boardwalkempire"
+     data-genre="crime"
+     data-img="https://artworks.thetvdb.com/banners/posters/84947-11.jpg">
+  <img src="https://artworks.thetvdb.com/banners/posters/84947-11.jpg" alt="Boardwalk Empire">
+  <div class="heart-btn"
+       data-title="Boardwalk Empire"
+       data-img="https://artworks.thetvdb.com/banners/posters/84947-11.jpg"
+       data-page="boardwalkempire">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="Westworld"
+     data-page="westworld"
+     data-genre="thriller"
+     data-img="https://image.tmdb.org/t/p/w1280/y55oBgf6bVMI7sFNXwJDrSIxPQt.jpg">
+  <img src="https://image.tmdb.org/t/p/w1280/y55oBgf6bVMI7sFNXwJDrSIxPQt.jpg" alt="Westworld">
+  <div class="heart-btn"
+       data-title="Westworld"
+       data-img="https://image.tmdb.org/t/p/w1280/y55oBgf6bVMI7sFNXwJDrSIxPQt.jpg"
+       data-page="westworld">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="The Night Of"
+     data-page="thenightof"
+     data-genre="crime"
+     data-img="https://static1.srcdn.com/wordpress/wp-content/uploads/The-Night-Of-poster.jpg">
+  <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/The-Night-Of-poster.jpg" alt="The Night Of">
+  <div class="heart-btn"
+       data-title="The Night Of"
+       data-img="https://static1.srcdn.com/wordpress/wp-content/uploads/The-Night-Of-poster.jpg"
+       data-page="thenightof">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="Banshee"
+     data-page="banshee"
+     data-genre="action"
+     data-img="https://www.themoviedb.org/t/p/original/7mCb9wurIv2Ohe1QEXKnUkIr8JD.jpg">
+  <img src="https://www.themoviedb.org/t/p/original/7mCb9wurIv2Ohe1QEXKnUkIr8JD.jpg" alt="Banshee">
+  <div class="heart-btn"
+       data-title="Banshee"
+       data-img="https://www.themoviedb.org/t/p/original/7mCb9wurIv2Ohe1QEXKnUkIr8JD.jpg"
+       data-page="banshee">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="The Punisher"
+     data-page="thepunisher"
+     data-genre="action"
+     data-img="https://m.media-amazon.com/images/M/MV5BZTI2NDllMjgtOWEyYi00Y2YxLThhYjQtNTQ0NTgwNDE1YmYzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+  <img src="https://m.media-amazon.com/images/M/MV5BZTI2NDllMjgtOWEyYi00Y2YxLThhYjQtNTQ0NTgwNDE1YmYzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="The Punisher">
+  <div class="heart-btn"
+       data-title="The Punisher"
+       data-img="https://m.media-amazon.com/images/M/MV5BZTI2NDllMjgtOWEyYi00Y2YxLThhYjQtNTQ0NTgwNDE1YmYzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+       data-page="thepunisher">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="1899"
+     data-page="1899"
+     data-genre="thriller"
+     data-img="https://myhotposters.com/cdn/shop/products/mL6475_1024x1024.jpg?v=1671141695">
+  <img src="https://myhotposters.com/cdn/shop/products/mL6475_1024x1024.jpg?v=1671141695" alt="1899">
+  <div class="heart-btn"
+       data-title="1899"
+       data-img="https://myhotposters.com/cdn/shop/products/mL6475_1024x1024.jpg?v=1671141695"
+       data-page="1899">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="The Sinner"
+     data-page="thesinner"
+     data-genre="crime"
+     data-img="https://image.tmdb.org/t/p/original/calfIjHgBGYH0cshlIbJwoVhy1j.jpg">
+  <img src="https://image.tmdb.org/t/p/original/calfIjHgBGYH0cshlIbJwoVhy1j.jpg" alt="The Sinner">
+  <div class="heart-btn"
+       data-title="The Sinner"
+       data-img="https://image.tmdb.org/t/p/original/calfIjHgBGYH0cshlIbJwoVhy1j.jpg"
+       data-page="thesinner">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="Top Boy"
+     data-page="topboy"
+     data-genre="crime"
+     data-img="https://tse4.mm.bing.net/th/id/OIP.DwgpdOj5JQtzBJzXa1NewwHaLH?rs=1&pid=ImgDetMain&o=7&rm=3">
+  <img src="https://tse4.mm.bing.net/th/id/OIP.DwgpdOj5JQtzBJzXa1NewwHaLH?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Top Boy">
+  <div class="heart-btn"
+       data-title="Top Boy"
+       data-img="https://tse4.mm.bing.net/th/id/OIP.DwgpdOj5JQtzBJzXa1NewwHaLH?rs=1&pid=ImgDetMain&o=7&rm=3"
+       data-page="topboy">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="Rome"
+     data-page="rome"
+     data-genre="drama"
+     data-img="https://tse4.mm.bing.net/th/id/OIP.qRfzWATpYfAn-SV48PGNsQHaKk?rs=1&pid=ImgDetMain&o=7&rm=3">
+  <img src="https://tse4.mm.bing.net/th/id/OIP.qRfzWATpYfAn-SV48PGNsQHaKk?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Rome">
+  <div class="heart-btn"
+       data-title="Rome"
+       data-img="https://tse4.mm.bing.net/th/id/OIP.qRfzWATpYfAn-SV48PGNsQHaKk?rs=1&pid=ImgDetMain&o=7&rm=3"
+       data-page="rome">💜</div>
+</div>
+
+<div class="carousel-item"
+     data-title="The Americans"
+     data-page="theamericans"
+     data-genre="thriller"
+     data-img="https://image.tmdb.org/t/p/original/zRCvujuDuoX1A5TPLjFKWX6bVVS.jpg">
+  <img src="https://image.tmdb.org/t/p/original/zRCvujuDuoX1A5TPLjFKWX6bVVS.jpg" alt="The Americans">
+  <div class="heart-btn"
+       data-title="The Americans"
+       data-img="https://image.tmdb.org/t/p/original/zRCvujuDuoX1A5TPLjFKWX6bVVS.jpg"
+       data-page="theamericans">💜</div>
+</div>
+
+</div>
+<script>
+function loadMyList() {
+  return JSON.parse(localStorage.getItem("myList")) || [];
+}
+
+function saveMyList(list) {
+  localStorage.setItem("myList", JSON.stringify(list));
+}
+
+// --- TOAST QUEUE SYSTEM ---
+let toastQueue = [];
+let toastActive = false;
+
+function showToast(message) {
+  toastQueue.push(message);
+  if (!toastActive) nextToast();
+}
+document.querySelectorAll(".carousel-item").forEach(card => {
+  card.addEventListener("click", function (e) {
+    
+    // Don't trigger when clicking heart button
+    if (e.target.classList.contains("heart-btn")) return;
+
+    const page = this.dataset.page;
+    if (!page) return;
+
+    // Open from series.html → go to the /series/... file
+    window.location.href = `series/${page}.html`;
+  });
+});
+
+function nextToast() {
+  if (toastQueue.length === 0) {
+    toastActive = false;
+    return;
+  }
+
+  toastActive = true;
+  const toast = document.getElementById("toast");
+  toast.textContent = toastQueue.shift();
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+
+    setTimeout(() => {
+      nextToast();
+    }, 350); 
+  }, 2200);
+}
+// -------------------------------------
+
+function markSavedHearts() {
+  const myList = loadMyList();
+
+  document.querySelectorAll(".heart-btn").forEach(btn => {
+    if (myList.some(item => item.title === btn.dataset.title)) {
+      btn.classList.add("hearted");
+    }
+  });
+}
+
+document.querySelectorAll(".heart-btn").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    const item = {
+      title: btn.dataset.title,
+      img: btn.dataset.img,
+      page: btn.dataset.page
+    };
+
+    let myList = loadMyList();
+
+    if (myList.some(x => x.title === item.title)) {
+      myList = myList.filter(x => x.title !== item.title);
+      btn.classList.remove("hearted");
+      showToast(`${item.title} removed from My List`);
+    } else {
+      myList.push(item);
+      btn.classList.add("hearted");
+      showToast(`${item.title} added to My List 💜`);
+    }
+
+    saveMyList(myList);
+  });
+});
+
+markSavedHearts();
+const genreButtons = document.querySelectorAll(".genre-btn");
+const cards = [...document.querySelectorAll(".carousel-item")];
+
+genreButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    genreButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const genre = btn.dataset.genre;
+
+    animateSort(genre);
+  });
+});
+
+function animateSort(selectedGenre) {
+  const visibleCards = cards.filter(card => {
+    if (selectedGenre === "all") return true;
+    return card.dataset.genre?.includes(selectedGenre);
+  });
+
+  const hiddenCards = cards.filter(card => !visibleCards.includes(card));
+
+  // STEP 1: Record FIRST positions
+  const firstPositions = new Map();
+  cards.forEach(card => {
+    firstPositions.set(card, card.getBoundingClientRect());
+  });
+
+  // STEP 2: Reorder DOM
+  const carousel = document.querySelector(".carousel");
+
+  [...visibleCards, ...hiddenCards].forEach(card => {
+    carousel.appendChild(card);
+  });
+
+  // STEP 3: Apply visibility
+  visibleCards.forEach(card => {
+    card.classList.remove("filtered-out");
+  });
+
+  hiddenCards.forEach(card => {
+    card.classList.add("filtered-out");
+  });
+
+  // STEP 4: Record LAST positions
+  cards.forEach(card => {
+    const last = card.getBoundingClientRect();
+    const first = firstPositions.get(card);
+
+    const deltaX = first.left - last.left;
+    const deltaY = first.top - last.top;
+
+    // STEP 5: Invert
+    card.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+  });
+
+  // STEP 6: Play animation
+  requestAnimationFrame(() => {
+    cards.forEach(card => {
+      card.style.transform = "";
+    });
+  });
+}
+
+// === SEARCH SYSTEM ===
+const searchDatabase = {
+  "breaking bad": { page: "series/breakingbad.html" },
+  "better call saul": { page: "series/bettercallsaul.html" },
+  "prison break": { page: "series/prisonbreak.html" },
+  "you": { page: "series/you.html" },
+  "dexter": {page: "series/dexter.html"},
+  "reacher": {page: "series/reacher.html"},
+  "thewalkingdead": {page: "series/thewalkingdead.html"},
+  "aliceinborderland": {page: "series/thewalkingdead.html"},
+  "f1": {page:"f1.html"},
+  "sinners": { page: "sinners.html" },
+  "a minecraft movie": { page: "minecraft.html" },
+  "frozen": {page: "kids.html"},
+  "minions": {page: "kids.html"},
+  "peppa pig": {page: "kids.html"},
+  "paw patrol": {page: "kids.html"},
+  "toy story": {page: "kids.html"},
+  "finding nemo": {page: "kids.html"},
+  "kung fu panda": {page: "kids.html"},
+  "cars": {page: "kids.html"},
+  "how to train your dragon": {page: "kids.html"},
+  "harry potter": {page: "kids.html"},
+  "the incredibles": {page: "kids.html"},
+  "moana": {page: "kids.html"},
+  "deadpool and wolverine": {page: "movies.html"},
+  "dune: part two": {page: "movies.html"},
+  "kong vs godzilla": {page: "movies.html"},
+  "oppenheimer": {page: "movies.html"},
+  "avatar": {page: "movies.html"},
+  "john wick 4": {page: "movies.html"},
+  "interstellar": {page: "movies.html"},
+  "transformers": {page: "movies.html"},
+  "the batman": {page: "movies.html"},
+  "mindhunter": { page: "series/mindhunter.html" },
+  "true detective": { page: "series/truedetective.html" },
+  "narcos": { page: "series/narcos.html" },
+  "the wire": { page: "series/thewire.html" },
+  "luther": { page: "series/luther.html" },
+  "ozark": { page: "series/ozark.html" },
+  "dark": { page: "series/dark.html" },
+  "squid game": { page: "series/squidgame.html" },
+  "money heist": { page: "series/moneyheist.html" },
+  "the night agent": { page: "series/thenightagent.html" },
+  "the boys": { page: "series/theboys.html" },
+  "the fall": { page: "series/thefall.html" },
+  "into the night": { page: "series/intothenight.html" },
+  "jack ryan": { page: "series/jack-ryan.html" },
+  "daredevil": { page: "series/daredevil.html" },
+  "vikings": { page: "series/vikings.html" },
+  "spartacus": { page: "series/spartacus.html" },
+  "the last kingdom": { page: "series/the-last-kingdom.html" },
+  "peaky blinders": { page: "series/peaky-blinders.html"},
+  "clickbait": { page: "series/clickbait.html" },
+  "house of the dragon": { page: "series/houseofthedragon.html" },
+  "the crown": { page: "series/the-crown.html" }, 
+  "snowfall": { page: "series/snowfall.html" },
+  "fargo": { page: "series/fargo.html" },
+  "boardwalk empire": { page: "series/boardwalkempire.html" },  
+  "westworld": { page: "series/westworld.html" },
+  "the night of": { page: "series/thenightof.html" }, 
+  "banshee": { page: "series/banshee.html" },
+  "the punisher": { page: "series/thepunisher.html" },
+  "1899": { page: "series/1899.html" },
+  "the sinner": { page: "series/thesinner.html" },
+  "the americans": { page: "series/theamericans.html" },
+  "rome": { page: "series/rome.html" },
+  "top boy": { page: "series/topboy.html" },
+  "game of thrones": { page: "series/gameofthrones.html"},
+  "pluribus": { page: "series/pluribus.html"}
+};
+
+
+const searchInput = document.getElementById("searchInput");
+const suggestionsBox = document.getElementById("suggestions");
+
+// === AUTO-SUGGEST SYSTEM ===
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
+  suggestionsBox.innerHTML = "";
+
+  if (query.length === 0) {
+    suggestionsBox.style.display = "none";
+    return;
+  }
+
+  // get titles from DB
+  const titles = Object.keys(searchDatabase);
+
+  // get matches
+  const matches = titles.filter(t => t.includes(query));
+
+  if (matches.length === 0) {
+    suggestionsBox.style.display = "none";
+    return;
+  }
+
+  suggestionsBox.style.display = "block";
+
+  matches.forEach(title => {
+    const div = document.createElement("div");
+    div.textContent = title;
+
+    div.onclick = () => {
+      const itemPage = searchDatabase[title].page;
+      window.location.href = itemPage;
+    };
+
+    suggestionsBox.appendChild(div);
+  });
+});
+// === ENTER KEY SEARCH HANDLER ===
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    const query = searchInput.value.toLowerCase().trim();
+
+    // If empty → do nothing
+    if (!query) return;
+
+    // If match exists → go to movie
+    if (searchDatabase[query]) {
+      window.location.href = searchDatabase[query].page;
+      return;
+    }
+
+    // Otherwise → go to "Not Found" page
+    window.location.href = "notfound.html?query=" + encodeURIComponent(query);
+  }
+});
+function goBack() {
+  if (document.referrer) {
+    history.back();
+  } else {
+    window.location.href = "index.html"; // fallback
+  }
+}
+function applyGenreFromHash() {
+  const hash = window.location.hash.replace("#", "").toLowerCase();
+  if (!hash) return;
+
+  const genreButtons = document.querySelectorAll(".genre-btn");
+
+  const targetBtn = [...genreButtons].find(
+    btn => btn.dataset.genre === hash
+  );
+
+  if (targetBtn) {
+    targetBtn.click();
+  }
+    genreButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    genreButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const genre = btn.dataset.genre;
+
+    history.replaceState(null, "", `#${genre}`);
+    animateSort(genre);
+  });
+}
+);}
+// Run once on page load
+window.addEventListener("DOMContentLoaded", applyGenreFromHash);
+
+// Run again when hash changes (navbar clicks on same page)
+window.addEventListener("hashchange", applyGenreFromHash);
+
+document.querySelectorAll(".dropdown-content a").forEach(link => {
+  link.addEventListener("click", () => {
+    const dropdown = link.closest(".dropdown");
+
+    // Temporarily disable hover so menu can close
+    dropdown.classList.add("force-close");
+
+    setTimeout(() => {
+      dropdown.classList.remove("force-close");
+    }, 50);
+  });
+});
+document.querySelectorAll(".dropdown-content a").forEach(link => {
+  link.addEventListener("click", () => {
+    const dropdown = link.closest(".dropdown");
+
+    // Disable hover temporarily
+    dropdown.classList.add("disable-hover");
+
+    // Re-enable hover after mouse leaves
+    const onLeave = () => {
+      dropdown.classList.remove("disable-hover");
+      dropdown.removeEventListener("mouseleave", onLeave);
+    };
+
+    dropdown.addEventListener("mouseleave", onLeave);
+  });
+});
+
+</script>
+<div id="toast" class="toast"></div>
+
+</body>
+</html>

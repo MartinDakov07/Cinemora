@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Search Results</title>
+  <link rel="stylesheet" href="kids.css">
+</head>
+<body>
+
+<h1 style="text-align:center; margin-top:50px;">Search Results</h1>
+
+<div id="searchResults" style="width:90%;max-width:1000px;margin:40px auto;text-align:center;"></div>
+
+<script>
+  // Get movie from URL
+  const params = new URLSearchParams(window.location.search);
+  const movie = params.get("q");
+
+  const resultsDiv = document.getElementById("searchResults");
+
+  if (!movie) {
+    resultsDiv.innerHTML = "<p>No movie provided.</p>";
+  } else {
+    resultsDiv.innerHTML = `
+      <h2>You searched for: <span style="color:#a44cf5">${movie}</span></h2>
+      <p>Now you can display results here, like posters, cards, etc.</p>
+    `;
+  }
+</script>
+
+</body>
+</html>

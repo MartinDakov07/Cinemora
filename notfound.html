@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Not Found</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    html{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:80%;
+    }
+    body {
+      background-color: #0a0a0a;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0; /* FIXED — removed the margin pushing navbar down */
+      padding-top: 130px; /* spacing for content, so navbar doesn't cover text */
+    }
+
+    /* NAVBAR FIXES */
+    header.navbar {
+      position: fixed;   /* keeps navbar at the top */
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      background-color: #0a0a0a;
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+      gap: 10px;
+      position: relative;
+    }
+
+    .navbar .home {
+      color: var(--accent, #6c63ff);
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .navbar .home:hover {
+      color: var(--accent2, #a44cf5);
+    }
+
+    .navbar h3 {
+      color: var(--accent2);
+      margin-left: 20px;
+    }
+
+    nav.nav-links {
+      margin-right: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links .active {
+      color: #6c63ff;
+      text-shadow: 0 0 10px #6c63ff;
+    }
+
+    .notfound-icon {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  opacity: 0.9;
+}
+
+.notfound-icon svg {
+  stroke: #6c63ff; /* your theme accent */
+  transition: 0.3s ease;
+}
+
+.notfound-icon svg:hover {
+  stroke: #a44cf5; /* your accent2 */
+  transform: scale(1.05);
+}
+.search-notfound {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.search-notfound input {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: 2px solid #6c63ff;
+  background-color:#0b0c10;
+  color:#fff;
+  outline: none;
+  width: 300px;
+  max-width: 90%;
+  transition: 0.3s;
+}
+
+.search-notfound input:focus {
+  border-color: #a44cf5;
+  box-shadow: 0 0 10px #6c63ff;
+}
+
+.suggestions-box {
+  position: absolute;
+  top: 45px;
+  width: 300px;
+  max-width: 90%;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+  display: none;
+  z-index: 100;
+}
+
+.suggestions-box div {
+  padding: 10px;
+  cursor: pointer;
+  color: #fff;
+  background-color:#0b0c10;
+  transition: 0.2s;
+}
+
+.suggestions-box div:hover {
+  background-color: #6c63ff;
+  color: #fff;
+}
+    .query {
+      color: #6c63ff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <img src="cinemora-removebg-preview.png" alt="Cinemora Logo" height="50">
+    <span>Your World of Entertainment</span>
+    <a href="index.html" class="home">← Back to Home</a>
+  </div>
+
+  <nav class="nav-links">
+    <div class="dropdown">
+  <a href="series.html" class="dropbtn">
+    <i class="fa-solid fa-tv"></i> Series
+    <i class="fa-solid fa-chevron-down caret"></i>
+  </a>
+  <div class="dropdown-content">
+    <a href="series.html#trending"><i class="fa-solid fa-fire"></i> Trending</a>
+    <a href="series.html#drama"><i class="fa-solid fa-masks-theater"></i> Drama</a>
+    <a href="series.html#action"><i class="fa-solid fa-bolt"></i> Action</a>
+    <a href="series.html#crime"><i class="fa-solid fa-gun"></i> Crime</a>
+    <a href="series.html#fantasy"><i class="fa-solid fa-dragon"></i> Fantasy</a>
+    <a href="series.html#thriller"><i class="fa-solid fa-skull"></i> Thriller</a>
+  </div>
+</div>
+
+
+  <!-- MOVIES DROPDOWN -->
+<div class="dropdown">
+  <a href="movies.html" class="dropbtn">
+    <i class="fa-solid fa-film"></i> Movies
+    <i class="fa-solid fa-chevron-down caret"></i>
+  </a>
+
+  <div class="dropdown-content">
+    <a href="movies.html#mystery"><i class="fa-solid fa-user-secret"></i> Mystery</a>
+    <a href="movies.html#romance"><i class="fa-solid fa-heart"></i> Romance</a>
+    <a href="movies.html#horror"><i class="fa-solid fa-ghost"></i> Horror</a>
+    <a href="movies.html#comedy"><i class="fa-solid fa-face-laugh"></i> Comedy</a>
+    <a href="movies.html#sci-fi"><i class="fa-solid fa-robot"></i> Sci-Fi</a>
+    <a href="movies.html#animation"><i class="fa-solid fa-wand-magic-sparkles"></i> Animation</a>
+    <a href="movies.html#documentary"><i class="fa-solid fa-camera"></i> Documentary</a>
+    <a href="movies.html#musical"><i class="fa-solid fa-music"></i> Musical</a>
+    <a href="movies.html#western"><i class="fa-solid fa-hat-cowboy"></i> Western</a>
+   <a href="movies.html#war"><i class="fa-solid fa-person-military-rifle"></i> War</a>
+    <a href="movies.html#biography"><i class="fa-solid fa-book-open"></i> Biography</a>
+    <a href="movies.html#sports"><i class="fa-solid fa-football"></i> Sports</a>
+  </div>
+</div>
+    <a href="kids.html">Kids</a>
+    <a href="mylist.html">My List</a>
+  </nav>
+</header>
+
+<!-- MAIN CONTENT (properly spaced) -->
+<div class="notfound-icon">
+  <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#6c63ff" stroke-width="1.5">
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    <line x1="8" y1="9" x2="10" y2="11"></line>
+    <line x1="10" y1="9" x2="8" y2="11"></line>
+  </svg>
+</div>
+
+<h1>We couldn't find a match for:</h1>
+<p class="query" id="queryText"></p>
+<p>Try checking your spelling or searching for another movie or series.</p>
+<div class="search-notfound">
+  <input type="text" id="notfoundSearch" placeholder="Try searching for another movie or series..." autocomplete="off">
+  <div id="notfoundSuggestions" class="suggestions-box"></div>
+</div>
+
+<script>
+      const params = new URLSearchParams(window.location.search);
+  const q = params.get("query");
+  document.getElementById("queryText").textContent = q;
+  // Example search database (same as your main page)
+const searchDatabase = {
+  "breaking bad": { page: "series/breakingbad.html" },
+  "better call saul": { page: "series/bettercallsaul.html" },
+  "prison break": { page: "series/prisonbreak.html" },
+  "you": { page: "series/you.html" },
+  "dexter": {page: "series/dexter.html"},
+  "reacher": {page: "series/reacher.html"},
+  "thewalkingdead": {page: "series/thewalkingdead.html"},
+  "aliceinborderland": {page: "series/thewalkingdead.html"},
+  "f1": {page:"f1.html"},
+  "sinners": { page: "sinners.html" },
+  "a minecraft movie": { page: "minecraft.html" },
+  "frozen": {page: "kids.html"},
+  "minions": {page: "kids.html"},
+  "peppa pig": {page: "kids.html"},
+  "paw patrol": {page: "kids.html"},
+  "toy story": {page: "kids.html"},
+  "finding nemo": {page: "kids.html"},
+  "kung fu panda": {page: "kids.html"},
+  "cars": {page: "kids.html"},
+  "how to train your dragon": {page: "kids.html"},
+  "harry potter": {page: "kids.html"},
+  "the incredibles": {page: "kids.html"},
+  "moana": {page: "kids.html"},
+  "deadpool and wolverine": {page: "movies.html"},
+  "dune: part two": {page: "movies.html"},
+  "kong vs godzilla": {page: "movies.html"},
+  "oppenheimer": {page: "movies.html"},
+  "avatar": {page: "movies.html"},
+  "john wick 4": {page: "movies.html"},
+  "interstellar": {page: "movies.html"},
+  "transformers": {page: "movies.html"},
+  "the batman": {page: "movies.html"},
+  "mindhunter": { page: "series/mindhunter.html" },
+  "true detective": { page: "series/truedetective.html" },
+  "narcos": { page: "series/narcos.html" },
+  "the wire": { page: "series/thewire.html" },
+  "luther": { page: "series/luther.html" },
+  "ozark": { page: "series/ozark.html" },
+  "dark": { page: "series/dark.html" },
+  "squid game": { page: "series/squidgame.html" },
+  "money heist": { page: "series/moneyheist.html" },
+  "the night agent": { page: "series/thenightagent.html" },
+  "the boys": { page: "series/theboys.html" },
+  "the fall": { page: "series/thefall.html" },
+  "into the night": { page: "series/intothenight.html" },
+  "jack ryan": { page: "series/jack-ryan.html" },
+  "daredevil": { page: "series/daredevil.html" },
+  "vikings": { page: "series/vikings.html" },
+  "spartacus": { page: "series/spartacus.html" },
+  "the last kingdom": { page: "series/the-last-kingdom.html" },
+  "peaky blinders": { page: "series/peaky-blinders.html"},
+  "clickbait": { page: "series/clickbait.html" },
+  "house of the dragon": { page: "series/houseofthedragon.html" },
+  "the crown": { page: "series/the-crown.html" }, 
+  "snowfall": { page: "series/snowfall.html" },
+  "fargo": { page: "series/fargo.html" },
+  "boardwalk empire": { page: "series/boardwalkempire.html" },  
+  "westworld": { page: "series/westworld.html" },
+  "the night of": { page: "series/thenightof.html" }, 
+  "banshee": { page: "series/banshee.html" },
+  "the punisher": { page: "series/thepunisher.html" },
+  "1899": { page: "series/1899.html" },
+  "the sinner": { page: "series/thesinner.html" },
+  "the americans": { page: "series/theamericans.html" },
+  "rome": { page: "series/rome.html" },
+  "top boy": { page: "series/topboy.html" },
+};
+
+  const searchInput = document.getElementById("notfoundSearch");
+  const suggestionsBox = document.getElementById("notfoundSuggestions");
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase().trim();
+    suggestionsBox.innerHTML = "";
+
+    if (query.length === 0) {
+      suggestionsBox.style.display = "none";
+      return;
+    }
+
+    const titles = Object.keys(searchDatabase);
+    const matches = titles.filter(t => t.includes(query));
+
+    if (matches.length === 0) {
+      suggestionsBox.style.display = "none";
+      return;
+    }
+
+    suggestionsBox.style.display = "block";
+
+    matches.forEach(title => {
+      const div = document.createElement("div");
+      div.textContent = title;
+      div.onclick = () => {
+        const itemPage = searchDatabase[title].page;
+        window.location.href = itemPage;
+      };
+      suggestionsBox.appendChild(div);
+    });
+  });
+</script>
+
+
+</body>
+</html>

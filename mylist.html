@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My List</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  body {
+    background: #0e0e12;
+    color: white;
+    font-family: Arial;
+    padding: 0 20px;
+  }
+    .navbar{
+      width: 100%;
+      background: rgba(15, 16, 22, 0.9);
+      padding: 40px 40px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+    }
+    .navbar .home:hover {
+      color: var(--accent2, #a44cf5);
+    }
+    .nav-links{
+      position:absolute;
+      right:130px;
+    }
+    .nav-links a:hover,
+    .nav-links .active {
+      color: #6c63ff;
+      text-shadow: 0 0 10px #6c63ff;
+    }
+  .list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    gap: 25px;
+    justify-content: center;
+    margin-top: 25px;
+  }
+
+  .list-card {
+    background: #1a1a1e;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+  }
+
+  .list-card img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .trash {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 70, 70, 0.12);
+  border: 2px solid #ff4a4a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.trash::before {
+  content: "✕";
+  color: #ff4a4a;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.trash:hover {
+  background: #ff4a4a;
+  border-color: #ff4a4a;
+  transform: scale(1.15);
+}
+
+.trash:hover::before {
+  color: white;
+}
+
+  .back-btn {
+    padding: 10px 20px;
+    background: #6c63ff;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .logo{
+    position:absolute;
+    left:40px;
+  }
+  .mylist{
+    margin-left:50px;
+  }
+    .navbar .home {
+      color: var(--accent, #6c63ff);
+      text-decoration: none;
+      margin-left:30px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+      .navbar .home:hover {
+      color: var(--accent2, #a44cf5);
+    }
+    .nav-links a:hover,
+    .nav-links .active {
+      color: #6c63ff;
+      text-shadow: 0 0 10px #6c63ff;
+    }
+</style>
+</head>
+
+<body>
+<header class="navbar">
+  <div class="logo">
+    <a href="index.html">
+      <img src="cinemora-removebg-preview.png" alt="Cinemora Logo" />
+    </a>
+    <span>Your World of Entertainment</span>
+    <a href="javascript:void(0)" class="home" onclick="goBack()">← Back</a>
+  </div>
+  <nav class="nav-links">
+<div class="dropdown">
+  <a href="series.html" class="dropbtn">
+    <i class="fa-solid fa-tv"></i> Series
+    <i class="fa-solid fa-chevron-down caret"></i>
+  </a>
+  <div class="dropdown-content">
+    <a href="series.html#trending"><i class="fa-solid fa-fire"></i> Trending</a>
+    <a href="series.html#drama"><i class="fa-solid fa-masks-theater"></i> Drama</a>
+    <a href="series.html#action"><i class="fa-solid fa-bolt"></i> Action</a>
+    <a href="series.html#crime"><i class="fa-solid fa-gun"></i> Crime</a>
+    <a href="series.html#fantasy"><i class="fa-solid fa-dragon"></i> Fantasy</a>
+    <a href="series.html#thriller"><i class="fa-solid fa-skull"></i> Thriller</a>
+  </div>
+</div>
+
+
+  <!-- MOVIES DROPDOWN -->
+<div class="dropdown">
+  <a href="movies.html" class="dropbtn">
+    <i class="fa-solid fa-film"></i> Movies
+    <i class="fa-solid fa-chevron-down caret"></i>
+  </a>
+
+  <div class="dropdown-content">
+    <a href="movies.html#mystery"><i class="fa-solid fa-user-secret"></i> Mystery</a>
+    <a href="movies.html#romance"><i class="fa-solid fa-heart"></i> Romance</a>
+    <a href="movies.html#horror"><i class="fa-solid fa-ghost"></i> Horror</a>
+    <a href="movies.html#comedy"><i class="fa-solid fa-face-laugh"></i> Comedy</a>
+    <a href="movies.html#sci-fi"><i class="fa-solid fa-robot"></i> Sci-Fi</a>
+    <a href="movies.html#animation"><i class="fa-solid fa-wand-magic-sparkles"></i> Animation</a>
+    <a href="movies.html#documentary"><i class="fa-solid fa-camera"></i> Documentary</a>
+    <a href="movies.html#musical"><i class="fa-solid fa-music"></i> Musical</a>
+    <a href="movies.html#western"><i class="fa-solid fa-hat-cowboy"></i> Western</a>
+   <a href="movies.html#war"><i class="fa-solid fa-person-military-rifle"></i> War</a>
+    <a href="movies.html#biography"><i class="fa-solid fa-book-open"></i> Biography</a>
+    <a href="movies.html#sports"><i class="fa-solid fa-football"></i> Sports</a>
+  </div>
+</div>
+
+
+      <a href="kids.html">Kids</a>
+      <a href="mylist.html">My List</a>
+  <div class="search">
+  <input type="text" id="searchInput" placeholder="Search..." autocomplete="off" />
+  <div id="suggestions" class="suggestions-box"></div>
+  </div>
+      <a class="subscribe-btn" href="subscribe.html">Subscribe</a>
+</nav>
+</header>
+
+<h2 class="mylist">My List</h2>
+
+<div id="listContainer" class="list-grid"></div>
+
+<script>
+const searchDatabase = {
+  "breaking bad": { page: "series/breakingbad.html" },
+  "better call saul": { page: "series/bettercallsaul.html" },
+  "prison break": { page: "series/prisonbreak.html" },
+  "you": { page: "series/you.html" },
+  "dexter": {page: "series/dexter.html"},
+  "reacher": {page: "series/reacher.html"},
+  "thewalkingdead": {page: "series/thewalkingdead.html"},
+  "aliceinborderland": {page: "series/thewalkingdead.html"},
+  "f1": {page:"f1.html"},
+  "sinners": { page: "sinners.html" },
+  "a minecraft movie": { page: "minecraft.html" },
+  "frozen": {page: "kids.html"},
+  "minions": {page: "kids.html"},
+  "peppa pig": {page: "kids.html"},
+  "paw patrol": {page: "kids.html"},
+  "toy story": {page: "kids.html"},
+  "finding nemo": {page: "kids.html"},
+  "kung fu panda": {page: "kids.html"},
+  "cars": {page: "kids.html"},
+  "how to train your dragon": {page: "kids.html"},
+  "harry potter": {page: "kids.html"},
+  "the incredibles": {page: "kids.html"},
+  "moana": {page: "kids.html"},
+  "deadpool and wolverine": {page: "movies.html"},
+  "dune: part two": {page: "movies.html"},
+  "kong vs godzilla": {page: "movies.html"},
+  "oppenheimer": {page: "movies.html"},
+  "avatar": {page: "movies.html"},
+  "john wick 4": {page: "movies.html"},
+  "interstellar": {page: "movies.html"},
+  "transformers": {page: "movies.html"},
+  "the batman": {page: "movies.html"},
+  "mindhunter": { page: "series/mindhunter.html" },
+  "true detective": { page: "series/truedetective.html" },
+  "narcos": { page: "series/narcos.html" },
+  "the wire": { page: "series/thewire.html" },
+  "luther": { page: "series/luther.html" },
+  "ozark": { page: "series/ozark.html" },
+  "dark": { page: "series/dark.html" },
+  "squid game": { page: "series/squidgame.html" },
+  "money heist": { page: "series/moneyheist.html" },
+  "the night agent": { page: "series/thenightagent.html" },
+  "the boys": { page: "series/theboys.html" },
+  "the fall": { page: "series/thefall.html" },
+  "into the night": { page: "series/intothenight.html" },
+  "jack ryan": { page: "series/jack-ryan.html" },
+  "daredevil": { page: "series/daredevil.html" },
+  "vikings": { page: "series/vikings.html" },
+  "spartacus": { page: "series/spartacus.html" },
+  "the last kingdom": { page: "series/the-last-kingdom.html" },
+  "peaky blinders": { page: "series/peaky-blinders.html"},
+  "clickbait": { page: "series/clickbait.html" },
+  "house of the dragon": { page: "series/houseofthedragon.html" },
+  "the crown": { page: "series/the-crown.html" }, 
+  "snowfall": { page: "series/snowfall.html" },
+  "fargo": { page: "series/fargo.html" },
+  "boardwalk empire": { page: "series/boardwalkempire.html" },  
+  "westworld": { page: "series/westworld.html" },
+  "the night of": { page: "series/thenightof.html" }, 
+  "banshee": { page: "series/banshee.html" },
+  "the punisher": { page: "series/thepunisher.html" },
+  "1899": { page: "series/1899.html" },
+  "the sinner": { page: "series/thesinner.html" },
+  "the americans": { page: "series/theamericans.html" },
+  "rome": { page: "series/rome.html" },
+  "top boy": { page: "series/topboy.html" },
+};
+
+
+const searchInput = document.getElementById("searchInput");
+const suggestionsBox = document.getElementById("suggestions");
+
+// === AUTO-SUGGEST SYSTEM ===
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
+  suggestionsBox.innerHTML = "";
+
+  if (query.length === 0) {
+    suggestionsBox.style.display = "none";
+    return;
+  }
+
+  // get titles from DB
+  const titles = Object.keys(searchDatabase);
+
+  // get matches
+  const matches = titles.filter(t => t.includes(query));
+
+  if (matches.length === 0) {
+    suggestionsBox.style.display = "none";
+    return;
+  }
+
+  suggestionsBox.style.display = "block";
+
+  matches.forEach(title => {
+    const div = document.createElement("div");
+    div.textContent = title;
+
+    div.onclick = () => {
+      const itemPage = searchDatabase[title].page;
+      window.location.href = itemPage;
+    };
+
+    suggestionsBox.appendChild(div);
+  });
+});
+// === ENTER KEY SEARCH HANDLER ===
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    const query = searchInput.value.toLowerCase().trim();
+
+    // If empty → do nothing
+    if (!query) return;
+
+    // If match exists → go to movie
+    if (searchDatabase[query]) {
+      window.location.href = searchDatabase[query].page;
+      return;
+    }
+
+    // Otherwise → go to "Not Found" page
+    window.location.href = "notfound.html?query=" + encodeURIComponent(query);
+  }
+});
+// Load MyList
+function loadMyList() {
+  const list = localStorage.getItem("myList");
+  if (!list) return [];
+
+  try {
+    const parsed = JSON.parse(list);
+
+    // Remove items missing title or img
+    return parsed.filter(item =>
+      item &&
+      typeof item.title === "string" &&
+      item.title.trim() !== "" &&
+      typeof item.img === "string" &&
+      item.img.trim() !== ""
+    );
+
+  } catch (e) {
+    // If JSON is corrupt, reset it
+    localStorage.setItem("myList", "[]");
+    return [];
+  }
+}
+
+
+function saveMyList(list) {
+  localStorage.setItem("myList", JSON.stringify(list));
+}
+
+// Render items
+function displayList() {
+  const container = document.getElementById("listContainer");
+  const list = loadMyList();
+
+  if (list.length === 0) {
+    container.innerHTML = "<p>You still have 0 saves.</p>";
+    return;
+  }
+
+  container.innerHTML = list.map(item => `
+    <div class="list-card">
+      <span class="trash" data-title="${item.title}"></span>
+      <img src="${item.img}" alt="${item.title}">
+      <h4>${item.title}</h4>
+    </div>
+  `).join("");
+
+  document.querySelectorAll(".trash").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const title = btn.dataset.title;
+      removeItem(title);
+    });
+  });
+}
+
+// Remove an item
+function removeItem(title) {
+  let list = loadMyList();
+  list = list.filter(item => item.title !== title);
+  saveMyList(list);
+  displayList();
+}
+
+displayList();
+function goBack() {
+  if (document.referrer) {
+    history.back();
+  } else {
+    window.location.href = "index.html"; // fallback
+  }
+}
+
+</script>
+
+</body>
+</html>
